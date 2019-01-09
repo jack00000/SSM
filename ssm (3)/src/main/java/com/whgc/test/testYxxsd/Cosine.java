@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
  
 public class Cosine {
 	
@@ -107,8 +108,12 @@ public class Cosine {
 	}
 	
 	public static void main(String[] args) {
-		String str1="余弦定理算法：doc1 与 doc2 相似度为：0.9954971, 耗时：22mm";
-		String str2="余弦定理算法：doc1 和doc2 相似度为：0.99425095, 用时：33mm";
+		/*String str1="余弦定理算法：doc1 与 doc2 相似度为：0.9954971, 耗时：22mm";
+		String str2="余弦定理算法：doc1 和doc2 相似度为：0.99425095, 用时：33mm";*/
+		System.out.println("请输入两个字符串");
+		Scanner sc = new Scanner(System.in);
+		String str1 = sc.nextLine();
+		String str2 = sc.nextLine();
 		long start=System.currentTimeMillis();  
 		double Similarity=Cosine.getSimilarity(str1, str2);
 		System.out.println("用时:"+(System.currentTimeMillis()-start)); 

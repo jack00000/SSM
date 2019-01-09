@@ -15,6 +15,10 @@ public class StrJaccard {
 		String str1 = sc.nextLine();
 		String str2 = sc.nextLine();
 		
+		
+		System.out.println(jaccardSim(str1,str2));
+	}
+	public static float jaccardSim(String str1,String str2) {
 		Set<Character> s1 = new HashSet<>();//set元素不可重复
 		Set<Character> s2 = new HashSet<>();
 		
@@ -38,8 +42,8 @@ public class StrJaccard {
 		
 		mergeNum = s1.size()+s2.size()-commonNum;
 		
-		float jaccard = commonNum/mergeNum;
-		System.out.println(jaccard);
+		 
+		return  commonNum/mergeNum;
 	}
 }
 
