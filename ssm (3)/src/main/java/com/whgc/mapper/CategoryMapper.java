@@ -1,21 +1,25 @@
 package com.whgc.mapper;
-
-import com.whgc.pojo.Category;
-import com.whgc.pojo.CategoryExample;
+ 
 import java.util.List;
 
+import com.whgc.pojo.Category;
+import com.whgc.util.Page;
+ 
 public interface CategoryMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Category record);
-
-    int insertSelective(Category record);
-
-    List<Category> selectByExample(CategoryExample example);
-
-    Category selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Category record);
-
-    int updateByPrimaryKey(Category record);
+ 
+      
+    public int add(Category category);  
+       
+      
+    public void delete(int id);  
+       
+      
+    public Category get(int id);  
+     
+      
+    public int update(Category category);   
+       
+      
+    public List<Category> list();
+      
 }
