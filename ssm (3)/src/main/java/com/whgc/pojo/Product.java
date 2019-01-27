@@ -1,85 +1,26 @@
 package com.whgc.pojo;
-
-import java.util.Date;
-
+  
 public class Product {
-    private Integer id;
-
-    private String name;
-
-    private String subTitle;
-
-    private Float originalPrice;
-
-    private Float promotePrice;
-
-    private Integer stock;
-
-    private Integer cid;
-
-    private Date createDate;
-
-    public Integer getId() {
+    int id;
+    String name;
+    float price;
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
-
-    public String getSubTitle() {
-        return subTitle;
+    public float getPrice() {
+        return price;
     }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle == null ? null : subTitle.trim();
+    public void setPrice(float price) {
+        this.price = price;
     }
-
-    public Float getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Float originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Float getPromotePrice() {
-        return promotePrice;
-    }
-
-    public void setPromotePrice(Float promotePrice) {
-        this.promotePrice = promotePrice;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+      
 }

@@ -28,5 +28,17 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/whgc/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/ehcache-1.2.4.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="D:/whgc/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
