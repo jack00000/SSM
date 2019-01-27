@@ -1,6 +1,6 @@
 package com.whgc.pojo;
 
-public class PropertyValue {
+public class Propertyvalue {
     private Integer id;
 
     private Integer pid;

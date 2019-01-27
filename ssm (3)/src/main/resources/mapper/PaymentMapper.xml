@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.whgc.mapper.PropertyValueMapper">
-  <resultMap id="BaseResultMap" type="com.whgc.pojo.PropertyValue">
+<mapper namespace="com.whgc.mapper.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.whgc.pojo.Payment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="ptid" jdbcType="INTEGER" property="ptid" />
-    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="payMan" jdbcType="VARCHAR" property="payMan" />
+    <result column="getMan" jdbcType="VARCHAR" property="getMan" />
+    <result column="payNum" jdbcType="VARCHAR" property="payNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -37,16 +38,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, pid, ptid, value
+    id, pid, payMan, getMan, payNum
   </sql>
-  <select id="selectByExample" parameterType="com.whgc.pojo.PropertyValueExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.whgc.pojo.PaymentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from propertyvalue
+    from payment_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -57,64 +58,74 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from propertyvalue
+    from payment_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from propertyvalue
+    delete from payment_
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.PropertyValue" useGeneratedKeys="true">
-    insert into propertyvalue (pid, ptid, value
-      )
-    values (#{pid,jdbcType=INTEGER}, #{ptid,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Payment" useGeneratedKeys="true">
+    insert into payment_ (pid, payMan, getMan, 
+      payNum)
+    values (#{pid,jdbcType=INTEGER}, #{payMan,jdbcType=VARCHAR}, #{getMan,jdbcType=VARCHAR}, 
+      #{payNum,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.PropertyValue" useGeneratedKeys="true">
-    insert into propertyvalue
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Payment" useGeneratedKeys="true">
+    insert into payment_
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">
         pid,
       </if>
-      <if test="ptid != null">
-        ptid,
+      <if test="payMan != null">
+        payMan,
       </if>
-      <if test="value != null">
-        value,
+      <if test="getMan != null">
+        getMan,
+      </if>
+      <if test="payNum != null">
+        payNum,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pid != null">
         #{pid,jdbcType=INTEGER},
       </if>
-      <if test="ptid != null">
-        #{ptid,jdbcType=INTEGER},
+      <if test="payMan != null">
+        #{payMan,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
+      <if test="getMan != null">
+        #{getMan,jdbcType=VARCHAR},
+      </if>
+      <if test="payNum != null">
+        #{payNum,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.PropertyValue">
-    update propertyvalue
+  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.Payment">
+    update payment_
     <set>
       <if test="pid != null">
         pid = #{pid,jdbcType=INTEGER},
       </if>
-      <if test="ptid != null">
-        ptid = #{ptid,jdbcType=INTEGER},
+      <if test="payMan != null">
+        payMan = #{payMan,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        value = #{value,jdbcType=VARCHAR},
+      <if test="getMan != null">
+        getMan = #{getMan,jdbcType=VARCHAR},
+      </if>
+      <if test="payNum != null">
+        payNum = #{payNum,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.PropertyValue">
-    update propertyvalue
+  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.Payment">
+    update payment_
     set pid = #{pid,jdbcType=INTEGER},
-      ptid = #{ptid,jdbcType=INTEGER},
-      value = #{value,jdbcType=VARCHAR}
+      payMan = #{payMan,jdbcType=VARCHAR},
+      getMan = #{getMan,jdbcType=VARCHAR},
+      payNum = #{payNum,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -80,7 +80,7 @@ CREATE TABLE news_ (
  
 CREATE TABLE payment_ (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT "支付id",
-  pid int(11) int(11) DEFAULT NULL COMMENT "外键：文章id",
+  pid int(11)  DEFAULT NULL COMMENT "外键：文章id",
   payMan varchar(255) DEFAULT NULL COMMENT "打赏人",
   getMan varchar(255) DEFAULT NULL COMMENT "被打赏作者",
   payNum varchar(255) DEFAULT NULL COMMENT "支付金额",

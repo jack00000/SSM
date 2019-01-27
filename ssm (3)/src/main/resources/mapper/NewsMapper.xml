@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.whgc.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.whgc.pojo.User">
+<mapper namespace="com.whgc.mapper.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.whgc.pojo.News">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="newsSum" jdbcType="INTEGER" property="newsSum" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="sendTime" jdbcType="VARCHAR" property="sendTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -36,16 +38,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password
+    id, uid, newsSum, msg, sendTime
   </sql>
-  <select id="selectByExample" parameterType="com.whgc.pojo.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.whgc.pojo.NewsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from news_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -56,52 +58,74 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from news_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from news_
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.User" useGeneratedKeys="true">
-    insert into user (name, password)
-    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.News" useGeneratedKeys="true">
+    insert into news_ (uid, newsSum, msg, 
+      sendTime)
+    values (#{uid,jdbcType=INTEGER}, #{newsSum,jdbcType=INTEGER}, #{msg,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.User" useGeneratedKeys="true">
-    insert into user
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.News" useGeneratedKeys="true">
+    insert into news_
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="uid != null">
+        uid,
       </if>
-      <if test="password != null">
-        password,
+      <if test="newsSum != null">
+        newsSum,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="sendTime != null">
+        sendTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="newsSum != null">
+        #{newsSum,jdbcType=INTEGER},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.News">
+    update news_
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="newsSum != null">
+        newsSum = #{newsSum,jdbcType=INTEGER},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        sendTime = #{sendTime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.News">
+    update news_
+    set uid = #{uid,jdbcType=INTEGER},
+      newsSum = #{newsSum,jdbcType=INTEGER},
+      msg = #{msg,jdbcType=VARCHAR},
+      sendTime = #{sendTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

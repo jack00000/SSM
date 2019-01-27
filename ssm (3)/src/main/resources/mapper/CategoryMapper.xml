@@ -44,7 +44,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from category
+    from category_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -55,19 +55,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from category
+    from category_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from category
+    delete from category_
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Category" useGeneratedKeys="true">
-    insert into category (name)
+    insert into category_ (name)
     values (#{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Category" useGeneratedKeys="true">
-    insert into category
+    insert into category_
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
@@ -80,7 +80,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.Category">
-    update category
+    update category_
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -89,7 +89,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.Category">
-    update category
+    update category_
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

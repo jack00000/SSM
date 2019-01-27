@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.whgc.mapper.OrderItemMapper">
-  <resultMap id="BaseResultMap" type="com.whgc.pojo.OrderItem">
+<mapper namespace="com.whgc.mapper.PaperimageMapper">
+  <resultMap id="BaseResultMap" type="com.whgc.pojo.Paperimage">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="oid" jdbcType="INTEGER" property="oid" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="imgPath" jdbcType="VARCHAR" property="imgPath" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -38,16 +37,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, pid, oid, uid, number
+    id, pid, type, imgPath
   </sql>
-  <select id="selectByExample" parameterType="com.whgc.pojo.OrderItemExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.whgc.pojo.PaperimageExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from orderitem
+    from paperimage_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -58,74 +57,64 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from orderitem
+    from paperimage_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orderitem
+    delete from paperimage_
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.OrderItem" useGeneratedKeys="true">
-    insert into orderitem (pid, oid, uid, 
-      number)
-    values (#{pid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
-      #{number,jdbcType=INTEGER})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Paperimage" useGeneratedKeys="true">
+    insert into paperimage_ (pid, type, imgPath
+      )
+    values (#{pid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{imgPath,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.OrderItem" useGeneratedKeys="true">
-    insert into orderitem
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Paperimage" useGeneratedKeys="true">
+    insert into paperimage_
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">
         pid,
       </if>
-      <if test="oid != null">
-        oid,
+      <if test="type != null">
+        type,
       </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="number != null">
-        number,
+      <if test="imgPath != null">
+        imgPath,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pid != null">
         #{pid,jdbcType=INTEGER},
       </if>
-      <if test="oid != null">
-        #{oid,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=INTEGER},
+      <if test="imgPath != null">
+        #{imgPath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.OrderItem">
-    update orderitem
+  <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.Paperimage">
+    update paperimage_
     <set>
       <if test="pid != null">
         pid = #{pid,jdbcType=INTEGER},
       </if>
-      <if test="oid != null">
-        oid = #{oid,jdbcType=INTEGER},
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=INTEGER},
+      <if test="imgPath != null">
+        imgPath = #{imgPath,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.OrderItem">
-    update orderitem
+  <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.Paperimage">
+    update paperimage_
     set pid = #{pid,jdbcType=INTEGER},
-      oid = #{oid,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=INTEGER},
-      number = #{number,jdbcType=INTEGER}
+      type = #{type,jdbcType=VARCHAR},
+      imgPath = #{imgPath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

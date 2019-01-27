@@ -47,7 +47,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from review
+    from review_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -58,21 +58,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from review
+    from review_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from review
+    delete from review_
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Review" useGeneratedKeys="true">
-    insert into review (content, uid, pid, 
+    insert into review_ (content, uid, pid, 
       createDate)
     values (#{content,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.whgc.pojo.Review" useGeneratedKeys="true">
-    insert into review
+    insert into review_
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="content != null">
         content,
@@ -103,7 +103,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.whgc.pojo.Review">
-    update review
+    update review_
     <set>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.whgc.pojo.Review">
-    update review
+    update review_
     set content = #{content,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=INTEGER},
       pid = #{pid,jdbcType=INTEGER},
