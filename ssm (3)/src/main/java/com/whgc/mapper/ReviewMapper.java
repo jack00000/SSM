@@ -1,21 +1,17 @@
 package com.whgc.mapper;
 
-import com.whgc.pojo.Review;
-import com.whgc.pojo.ReviewExample;
 import java.util.List;
 
+import com.whgc.pojo.Review;
+
 public interface ReviewMapper {
-    int deleteByPrimaryKey(Integer id);
+	public int add(Review Review);
 
-    int insert(Review record);
+	public void delete(int id);
 
-    int insertSelective(Review record);
+	public Review get(int id);
 
-    List<Review> selectByExample(ReviewExample example);
+	public int update(Review Review);
 
-    Review selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Review record);
-
-    int updateByPrimaryKey(Review record);
+	public List<Review> list();
 }

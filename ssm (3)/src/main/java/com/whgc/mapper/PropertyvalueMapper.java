@@ -1,21 +1,17 @@
 package com.whgc.mapper;
 
-import com.whgc.pojo.Propertyvalue;
-import com.whgc.pojo.PropertyvalueExample;
 import java.util.List;
 
+import com.whgc.pojo.Propertyvalue;
+
 public interface PropertyvalueMapper {
-    int deleteByPrimaryKey(Integer id);
+	public int add(Propertyvalue Propertyvalue);
 
-    int insert(Propertyvalue record);
+	public void delete(int id);
 
-    int insertSelective(Propertyvalue record);
+	public Propertyvalue get(int id);
 
-    List<Propertyvalue> selectByExample(PropertyvalueExample example);
+	public int update(Propertyvalue Propertyvalue);
 
-    Propertyvalue selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Propertyvalue record);
-
-    int updateByPrimaryKey(Propertyvalue record);
+	public List<Propertyvalue> list();
 }

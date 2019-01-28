@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.whgc.mapper.PaperimageMapper">
+	    <insert id="add" parameterType="Paperimage" >
+	        insert into Paperimage_ ( name ) values (#{name})    
+	    </insert>
+	    
+	    <delete id="delete" parameterType="Paperimage" >
+	        delete from Paperimage_ where id= #{id}   
+	    </delete>
+	    
+	    <select id="get" parameterType="_int" resultType="Paperimage">
+	        select * from   Paperimage_  where id= #{id}    
+	    </select>
+
+	    <update id="update" parameterType="Paperimage" >
+	        update Paperimage_ set name=#{name} where id=#{id}    
+	    </update>
+	    <select id="list" resultType="Paperimage">
+	        select * from   Paperimage_      
+	    </select>
+	</mapper>

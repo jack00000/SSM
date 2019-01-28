@@ -1,21 +1,17 @@
 package com.whgc.mapper;
 
-import com.whgc.pojo.Paperimage;
-import com.whgc.pojo.PaperimageExample;
 import java.util.List;
 
+import com.whgc.pojo.Paperimage;
+
 public interface PaperimageMapper {
-    int deleteByPrimaryKey(Integer id);
+	public int add(Paperimage Paperimage);
 
-    int insert(Paperimage record);
+	public void delete(int id);
 
-    int insertSelective(Paperimage record);
+	public Paperimage get(int id);
 
-    List<Paperimage> selectByExample(PaperimageExample example);
+	public int update(Paperimage Paperimage);
 
-    Paperimage selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Paperimage record);
-
-    int updateByPrimaryKey(Paperimage record);
+	public List<Paperimage> list();
 }

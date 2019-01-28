@@ -1,21 +1,17 @@
 package com.whgc.mapper;
 
-import com.whgc.pojo.News;
-import com.whgc.pojo.NewsExample;
 import java.util.List;
 
+import com.whgc.pojo.News;
+
 public interface NewsMapper {
-    int deleteByPrimaryKey(Integer id);
+	public int add(News news);
 
-    int insert(News record);
+	public void delete(int id);
 
-    int insertSelective(News record);
+	public News get(int id);
 
-    List<News> selectByExample(NewsExample example);
+	public int update(News news);
 
-    News selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(News record);
-
-    int updateByPrimaryKey(News record);
+	public List<News> list();
 }

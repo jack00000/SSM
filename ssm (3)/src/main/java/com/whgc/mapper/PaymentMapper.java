@@ -1,21 +1,17 @@
 package com.whgc.mapper;
 
-import com.whgc.pojo.Payment;
-import com.whgc.pojo.PaymentExample;
 import java.util.List;
 
+import com.whgc.pojo.Payment;
+
 public interface PaymentMapper {
-    int deleteByPrimaryKey(Integer id);
+	public int add(Payment Payment);
 
-    int insert(Payment record);
+	public void delete(int id);
 
-    int insertSelective(Payment record);
+	public Payment get(int id);
 
-    List<Payment> selectByExample(PaymentExample example);
+	public int update(Payment Payment);
 
-    Payment selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Payment record);
-
-    int updateByPrimaryKey(Payment record);
+	public List<Payment> list();
 }
