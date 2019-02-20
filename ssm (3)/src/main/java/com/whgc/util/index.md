@@ -33,7 +33,7 @@ type: "about"
 
 ## 技术文章
 
-- 本站有目前256篇博文(从大一下至今一直在写)
+- 本站有目前350篇博文(从大一下至今一直在写)
 - [java方面](https://jack00000.github.io/categories/how2j/)
 - [Android方面](https://jack00000.github.io/tags/CODE-2/)
 - [其余技术杂项](https://jack00000.github.io/categories/)
@@ -57,7 +57,7 @@ type: "about"
 - 数据库相关：MySQL/Oracle/hsqldb
 - 版本管理、文档和自动化部署工具：Git
 - 单元测试：junit/loadrunner
-- 云和开放平台：微信小程序(了解)
+- 云和开放平台：微信小程序(知识付费小程序(毕设))
 
 ---
 

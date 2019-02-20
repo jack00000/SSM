@@ -1,3 +1,11 @@
+---
+title: Pshare api文档
+date: 2019-2-15 14:00
+tags:
+categories: 毕业设计
+---
+
+
 # 定义接口规范
 
 ## 1.http://localhost:8080/ssm/getPapersJson
@@ -304,5 +312,3 @@
 
 ## 5.http://localhost:8080/ssm/getUpdatingsJson/postId
 - 获取根据id获取文章信息
-
-

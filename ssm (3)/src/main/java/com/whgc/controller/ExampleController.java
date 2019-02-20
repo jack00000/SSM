@@ -12,19 +12,15 @@ import com.whgc.mapper.CategoryMapper;
 import com.whgc.pojo.Category;
 import com.whgc.util.Page;
 
-/**
- * index 界面的文章数据的获取
- * @author esesoft
- *
- */
+// 告诉spring mvc这是一个控制器类
 @Controller
 @ResponseBody
 @RequestMapping("")
-public class PaperController {
+public class ExampleController {
 	@Autowired
 	CategoryMapper categoryMapper;
 
-	@RequestMapping("/getPapersJson")
+	@RequestMapping("/admin")
 	public String listCategory(Page page) {
 		List<Category> cs = categoryMapper.list();
 		return JSONObject.toJSONString(cs);
