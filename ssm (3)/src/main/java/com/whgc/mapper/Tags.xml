@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.whgc.mapper.TagsMapper">
+	    <insert id="add" parameterType="Tags" >
+	        insert into Tags_  values (#{id},#{pid},#{name})    
+	    </insert>
+	    
+	    <delete id="delete" parameterType="Tags" >
+	        delete from Tags_ where id= #{id}   
+	    </delete>
+	    
+	    <select id="get" parameterType="_int" resultType="Tags">
+	        select * from   Tags_  where id= #{id}    
+	    </select>
+
+	    <update id="update" parameterType="Tags" >
+	        update Tags_ set name=#{name} where id=#{id}    
+	    </update>
+	    <select id="list" resultType="Tags">
+	        select * from   Tags_      
+	    </select>
+	     <select id="getByPid" parameterType="_int" resultType="Tags">
+	        select * from   Tags_ where pid = #{pid}  
+	    </select>
+	</mapper>

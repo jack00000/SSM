@@ -8,17 +8,15 @@ public interface TagsMapper {
  
       
     public int add(Tags tags);  
-       
-      
+         
     public void delete(int id);  
-       
-      
-    public Category get(int id);  
      
+    public Category get(int id);   
       
     public int update(Tags tags);   
-       
-      
+           
     public List<Tags> list();
+    
+    public List<Tags> getByPid(int pid);
       
 }

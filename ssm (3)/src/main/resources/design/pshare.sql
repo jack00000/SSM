@@ -1,3 +1,7 @@
+/*
+ Target Server Type    : MySQL
+ Date: 21/02/2019 10:08:51
+*/
 DROP DATABASE IF EXISTS pshare_ssm;
 CREATE DATABASE pshare_ssm DEFAULT CHARACTER SET utf8;
 USE pshare_ssm;
@@ -99,7 +103,9 @@ CREATE TABLE payment_ (
   PRIMARY KEY (id),
   CONSTRAINT fk_payment_paper FOREIGN KEY (pid) REFERENCES user_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "消息表";
-
+-- ----------------------------
+-- data for test
+-- ----------------------------
 insert into user_ values(1,'demo1',null,null,null,null);
 insert into user_ values(2,'demo2',null,null,null,null);
 insert into user_ values(3,'demo3',null,null,null,null);

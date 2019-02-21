@@ -6,15 +6,9 @@ public class Paper {
     private Integer id;
     private Integer uid;
 	private Integer cid;
-
     private String title;
-
-    private String author;
-
     private String updateTime;
-
     private String wordSum;
-
     private String content;
     private String description;
     private List<String>tags;
@@ -66,14 +60,6 @@ public class Paper {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
 
     public String getUpdateTime() {
         return updateTime;

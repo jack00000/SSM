@@ -14,16 +14,14 @@ public class IndexData {
 	private String title;
 	private String description;
 	private String imgUrl;
-	private List<Tags> tags;
+	private List<String> tags;
 	private String paperId;
 
 	public String getPaperId() {
 		return paperId;
 	}
 
-	public List<Tags> getTags() {
-		return tags;
-	}
+	
 
 	public void setPaperId(String paperId) {
 		this.paperId = paperId;
@@ -53,11 +51,19 @@ public class IndexData {
 		this.imgUrl = imgUrl;
 	}
 
-	public void setTags(List<Tags> tags2) {
-		// TODO Auto-generated method stub
-		
+
+
+	public List<String> getTags() {
+		return tags;
 	}
 
+
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	
 	
 
 }

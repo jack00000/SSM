@@ -89,6 +89,7 @@ public class IndexController {
 	
 	@RequestMapping("/getIndexData")
 	public String getIndexData(){
+		//定义数据类indexData  然后用fastjson直接转换
 		List<IndexData>indexDatas=new ArrayList<>();
 		List<Paper>papers=paperMapper.list();
 		for(Paper paper:papers){
@@ -96,18 +97,17 @@ public class IndexController {
 			indexData.setTitle(paper.getTitle());
 			indexData.setImgUrl("'https://image.weilanwl.com/img/4x3-1.jpg");
 			indexData.setDescription(paper.getDescription());
-			List<Tags>tags=new ArrayList<>();
-			Tags tags2=new Tags();
-			tags2.setPid(paper.getId());
-			tags2.setName("人工智能");
-			tags.add(tags2);
+			List<String>tags=new ArrayList<>();
+			tagsMapper.get(1);
+			List<Tags>tags2=tagsMapper.getByPid(paper.getId());
+			for(Tags s:tags2){
+				tags.add(s.getName());
+			}
 			indexData.setTags(tags);
 			indexDatas.add(indexData);
+			
 		}
 			
-		
-		
-		System.out.println(indexDatas.toString());
 		return JSONObject.toJSONString(indexDatas);
 		
 	}
