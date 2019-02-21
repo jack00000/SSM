@@ -14,16 +14,19 @@ public class IndexData {
 	private String title;
 	private String description;
 	private String imgUrl;
-	private List<String> tags;
-	private String paperId;
-
-	public String getPaperId() {
-		return paperId;
-	}
+	private List<Tags> tags;
+	private int paperId;
 
 	
 
-	public void setPaperId(String paperId) {
+	
+
+
+	public int getPaperId() {
+		return paperId;
+	}
+
+	public void setPaperId(int paperId) {
 		this.paperId = paperId;
 	}
 
@@ -51,17 +54,15 @@ public class IndexData {
 		this.imgUrl = imgUrl;
 	}
 
-
-
-	public List<String> getTags() {
+	public List<Tags> getTags() {
 		return tags;
 	}
 
-
-
-	public void setTags(List<String> tags) {
+	public void setTags(List<Tags> tags) {
 		this.tags = tags;
 	}
+
+
 
 	
 	

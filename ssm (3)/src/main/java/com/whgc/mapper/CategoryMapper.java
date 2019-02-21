@@ -3,7 +3,6 @@ package com.whgc.mapper;
 import java.util.List;
 
 import com.whgc.pojo.Category;
-import com.whgc.util.Page;
  
 public interface CategoryMapper {
  

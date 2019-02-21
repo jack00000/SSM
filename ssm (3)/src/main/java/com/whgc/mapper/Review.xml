@@ -22,4 +22,8 @@
 	    <select id="list" resultType="Review">
 	        select * from   Review_      
 	    </select>
+	    
+	     <select id="getByPid" parameterType="_int" resultType="Review">
+	        select * from   Review_    where pid= #{pid}     
+	    </select>
 	</mapper>

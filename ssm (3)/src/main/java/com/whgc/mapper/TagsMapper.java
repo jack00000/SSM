@@ -11,7 +11,7 @@ public interface TagsMapper {
          
     public void delete(int id);  
      
-    public Category get(int id);   
+    public Tags get(int id);   
       
     public int update(Tags tags);   
            

@@ -28,6 +28,9 @@ public class Md2html {
 	 * @param file
 	 * @return
 	 */
+	public static void main(String[] args) {
+		System.out.println(markdown2Html(new File("D:\\index.md")));
+	}
 	public static String markdown2Html(File file){
 		try (BufferedReader reader = new BufferedReader(new FileReader(file));){
 			String lineStr = null;
@@ -35,6 +38,7 @@ public class Md2html {
 			StringBuffer sb = new StringBuffer();
 			while ((lineStr = reader.readLine())!=null) {
 				sb.append(lineStr).append("\n");
+//				sb.append(lineStr);
 				//System.out.println(lineStr);
 			}
 			return markdown2Html(sb.toString());

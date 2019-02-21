@@ -14,4 +14,6 @@ public interface ReviewMapper {
 	public int update(Review Review);
 
 	public List<Review> list();
+	
+	public List<Review> getByPid(int pid);
 }

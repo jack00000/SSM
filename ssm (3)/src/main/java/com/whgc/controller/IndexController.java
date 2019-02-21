@@ -1,11 +1,16 @@
 package com.whgc.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.whgc.mapper.CategoryMapper;
 import com.whgc.mapper.PaperMapper;
+import com.whgc.mapper.ReviewMapper;
 import com.whgc.mapper.TagsMapper;
 import com.whgc.pojo.Paper;
+import com.whgc.pojo.Review;
 import com.whgc.pojo.Tags;
 import com.whgc.pojoData.IndexData;
+import com.whgc.pojoData.IndexPaperDetailData;
 import com.whgc.util.Md2html;
 import com.whgc.util.Page;
 
@@ -33,7 +42,12 @@ import com.whgc.util.Page;
 public class IndexController {
 	@Autowired
 	PaperMapper paperMapper;
+	@Autowired
 	TagsMapper tagsMapper;
+	@Autowired
+	CategoryMapper categoryMapper;
+	@Autowired
+	ReviewMapper reviewMapper;
 
 	@RequestMapping("/getPapersJson")
 	public String listCategory(Page page) {
@@ -67,17 +81,7 @@ public class IndexController {
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 				paper.setUpdateTime(df.format(new Date()));// new Date()为获取当前系统时间
 				paperMapper.add(paper);
-//				//2.向tags表插入数据
-//				Tags tags=new Tags();
-//				tags.setId(null);
-//				tags.setPid(count);
-//				tags.setName("人工智能");
-//				tagsMapper.add(tags);
-//				Tags tags2=new Tags();
-//				tags.setId(null);
-//				tags.setPid(count);
-//				tags.setName("计算机视觉");
-//				tagsMapper.add(tags2);
+			
 							
 			}
 			
@@ -90,26 +94,113 @@ public class IndexController {
 	@RequestMapping("/getIndexData")
 	public String getIndexData(){
 		//定义数据类indexData  然后用fastjson直接转换
-		List<IndexData>indexDatas=new ArrayList<>();
-		List<Paper>papers=paperMapper.list();
-		for(Paper paper:papers){
-			IndexData indexData=new IndexData();
-			indexData.setTitle(paper.getTitle());
-			indexData.setImgUrl("'https://image.weilanwl.com/img/4x3-1.jpg");
-			indexData.setDescription(paper.getDescription());
-			List<String>tags=new ArrayList<>();
-			tagsMapper.get(1);
-			List<Tags>tags2=tagsMapper.getByPid(paper.getId());
-			for(Tags s:tags2){
-				tags.add(s.getName());
+		//所有文章的简介数据indexDatas
+		try {
+			List<IndexData>indexDatas=new ArrayList<>();
+			List<Paper>papers=paperMapper.list();
+			for(Paper paper:papers){
+				IndexData indexData=new IndexData();
+				indexData.setTitle(paper.getTitle());
+				indexData.setImgUrl("'https://image.weilanwl.com/img/4x3-1.jpg");
+				indexData.setDescription(paper.getDescription());
+				List<Tags>tags=tagsMapper.getByPid(paper.getId());
+				indexData.setTags(tags);
+				indexData.setPaperId(paper.getId());
+				indexDatas.add(indexData);
+				//写个异常测一下
+//				int value = 10 / 0;
+				
 			}
-			indexData.setTags(tags);
-			indexDatas.add(indexData);
-			
+			//根据api文档规范数据格式  请求成功 请求 各返回什么
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status","200" );
+			meta.put("msg","successs" );
+			map.put("meta", meta);
+			Map<String,Object> respond = new HashMap<String,Object>();
+			respond.put("datas",indexDatas);
+			map.put("respond", respond);
+			return JSONObject.toJSONString(map);
+		} catch (Exception e) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status",e.toString());
+			meta.put("msg","failed" );
+			map.put("meta", meta);
+			return JSONObject.toJSONString(map);
+		}	
+	}
+	
+	@RequestMapping("/getIndexCategories")
+	public String getIndexCategories(){
+		try {
+			//根据api文档规范数据格式  请求成功 请求 各返回什么
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status","200" );
+			meta.put("msg","successs" );
+			map.put("meta", meta);
+			Map<String,Object> respond = new HashMap<String,Object>();
+			respond.put("datas",categoryMapper.list());
+			map.put("respond", respond);
+			//写个异常测一下
+//			int value = 10 / 0;
+			return JSONObject.toJSONString(map);
+		} catch (Exception e) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status",e.toString());
+			meta.put("msg","failed" );
+			map.put("meta", meta);
+			return JSONObject.toJSONString(map);
 		}
-			
-		return JSONObject.toJSONString(indexDatas);
 		
 	}
+	
+	@RequestMapping("/getIndexPaperDetailData")
+	public String getIndexPaperDetailDatas(HttpServletRequest req){
+		//定义数据类IndexPaperDetailData  然后用fastjson直接转换
+		//所有文章的具体内容数据IndexPaperDetailDatas
+		try {
+			//检测参数 防攻击
+//			int pid=Integer.parseInt(req.getParameter("postId"));
+			int pid=1;
+			Paper paper=paperMapper.get(pid);
+			IndexPaperDetailData indexDatas=new IndexPaperDetailData();
+			indexDatas.setId(paper.getId());
+			indexDatas.setCid(paper.getCid());
+			indexDatas.setUid(paper.getUid());
+			indexDatas.setImg("https://image.weilanwl.com/img/4x3-2.jpg");
+			indexDatas.setTitle(paper.getTitle());
+			indexDatas.setDescription(paper.getDescription());
+			indexDatas.setUpdateTime(paper.getUpdateTime());
+			indexDatas.setWordSum(paper.getWordSum());
+			List<Review>comments=reviewMapper.getByPid(paper.getId());
+			indexDatas.setComments(comments);
+			String string=Md2html.markdown2Html(new File("D:\\index.md"));
+			System.out.println(Md2html.markdown2Html(new File("D:\\index.md")));
+			indexDatas.setContent(string);
+			
+			//根据api文档规范数据格式  请求成功 请求 各返回什么
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status","200" );
+			meta.put("msg","successs" );
+			map.put("meta", meta);
+			Map<String,Object> respond = new HashMap<String,Object>();
+			respond.put("datas",indexDatas);
+			map.put("respond", respond);
+			return JSONObject.toJSONString(map);
+		} catch (Exception e) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,String> meta = new HashMap<String,String>();
+			meta.put("status",e.toString());
+			meta.put("msg","failed" );
+			map.put("meta", meta);
+			return JSONObject.toJSONString(map);
+		}
+				
+	}
+	
 
 }
