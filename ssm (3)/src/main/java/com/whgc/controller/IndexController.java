@@ -163,8 +163,8 @@ public class IndexController {
 		//所有文章的具体内容数据IndexPaperDetailDatas
 		try {
 			//检测参数 防攻击
-//			int pid=Integer.parseInt(req.getParameter("postId"));
-			int pid=1;
+			int pid=Integer.parseInt(req.getParameter("pid"));
+//			int pid=1;
 			Paper paper=paperMapper.get(pid);
 			IndexPaperDetailData indexDatas=new IndexPaperDetailData();
 			indexDatas.setId(paper.getId());
@@ -178,7 +178,6 @@ public class IndexController {
 			List<Review>comments=reviewMapper.getByPid(paper.getId());
 			indexDatas.setComments(comments);
 			String string=Md2html.markdown2Html(new File("D:\\index.md"));
-			System.out.println(Md2html.markdown2Html(new File("D:\\index.md")));
 			indexDatas.setContent(string);
 			
 			//根据api文档规范数据格式  请求成功 请求 各返回什么
