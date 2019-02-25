@@ -106,11 +106,11 @@ CREATE TABLE payment_ (
 -- ----------------------------
 -- data for test
 -- ----------------------------
-insert into user_ values(1,'demo1',null,null,null,null);
-insert into user_ values(2,'demo2',null,null,null,null);
-insert into user_ values(3,'demo3',null,null,null,null);
-insert into user_ values(4,'demo4',null,null,null,null);
-insert into user_ values(5,'demo5',null,null,null,null);
+insert into user_ values(1,'demo1',"pw1",null,null,null);
+insert into user_ values(2,'demo2',"pw2",null,null,null);
+insert into user_ values(3,'demo3',"pw3",null,null,null);
+insert into user_ values(4,'demo4',"pw4",null,null,null);
+insert into user_ values(5,'demo5',"pw5",null,null,null);
 
 insert into category_ values(1,'java');
 insert into category_ values(2,'c#');
