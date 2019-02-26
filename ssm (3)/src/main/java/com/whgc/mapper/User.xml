@@ -24,7 +24,7 @@
 	    </select>
 	    
 	      <select id="getBynp" parameterType="User" resultType="User">
-	        select * from   User_  where name=#{name} and password=#{password}    
+	        select * from   User_  where name=#{name} and password=#{password}   
 	    </select>
 	</mapper>
 

@@ -14,9 +14,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.javac.util.List;
 import com.whgc.mapper.CategoryMapper;
 import com.whgc.mapper.UserMapper;
+import com.whgc.pojo.Category;
 import com.whgc.pojo.User;
 import com.whgc.util.MapperUtil;
 import com.whgc.util.Page;
+
+import cn.hutool.db.Session;
 /**
  * 后台页面的跳转
  * @author esesoft
@@ -41,18 +44,31 @@ public class BackendController {
 		return "login";
 	}
 	@RequestMapping("/login2Backend")
-	 public String login(@RequestParam("name") String name, @RequestParam("password") String password, Model model, HttpSession session) {
-        name = HtmlUtils.htmlEscape(name);
-        password =HtmlUtils.htmlEscape(password);
-        String user=MapperUtil.getByNameAndPW("demo1","pw1");
-//        List<User>users=(List<User>) JSONObject.parseArray(user, User.class);
-        JSONObject jsonObject=JSONObject.parseObject(user);
-        if(null==user){
-            model.addAttribute("msg", "账号密码错误");
-            return "fore/login";
-        }
-        session.setAttribute("user", user);
-        return "redirect:forehome";
-    }
-	
+	public String login2Backend(User user, Model model,HttpSession session) {
+		String user1 = MapperUtil.getByNameAndPW(user.getName(), user.getPassword());
+		User user2=new User();
+		user2.setName(user.getName());
+		if (null == user1) {
+			model.addAttribute("msg", "账号密码错误");
+			return "login";
+		} else {
+			model.addAttribute("user2", user2);
+			session.setAttribute("user2", user2);
+			return "backendIndex";
+			//重定向报错 未解决
+//			return "redirect:backendIndex";
+		}
+
+	}
+	//----------------------------------
+	//后台管理的跳转页面
+	@RequestMapping("/categoryMana")
+	public String categoryMana(Model model,HttpSession session) {
+		java.util.List<Category>cs=categoryMapper.list();
+		model.addAttribute("cs", cs);
+		session.getAttribute("user2");
+		return "category";
+
+	}
+
 }
