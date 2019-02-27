@@ -23,8 +23,8 @@
 	        select * from   User_      
 	    </select>
 	    
-	      <select id="getBynp" parameterType="User" resultType="User">
-	        select * from   User_  where name=#{name} and password=#{password}   
+	      <select id="getBynp" parameterType="string" resultType="User">
+	        select * from   User_  where name=#{0} and password=#{1}   
 	    </select>
 	</mapper>
 

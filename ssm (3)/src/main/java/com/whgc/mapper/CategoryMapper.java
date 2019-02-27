@@ -3,6 +3,7 @@ package com.whgc.mapper;
 import java.util.List;
 
 import com.whgc.pojo.Category;
+import com.whgc.util.Page;
  
 public interface CategoryMapper {
  
@@ -20,5 +21,9 @@ public interface CategoryMapper {
        
       
     public List<Category> list();
+    
+    public List<Category> listByPage(int start, int end);
+    
+    public int getTotal();
       
 }

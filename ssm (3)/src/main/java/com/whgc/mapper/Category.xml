@@ -22,5 +22,13 @@
 	    <select id="list" resultType="Category">
 	        select * from   category_      
 	    </select>
+	    
+	     <select id="listByPage" parameterType="_int" resultType="Category">
+	        select * from   category_  limit #{0} , #{1}  
+	    </select>
+	    
+	    <select id="getTotal"  resultType="int">
+	        select count(*) from category_
+	    </select>
 	</mapper>
 

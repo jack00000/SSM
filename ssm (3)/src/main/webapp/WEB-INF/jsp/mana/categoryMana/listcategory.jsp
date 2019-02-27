@@ -4,7 +4,7 @@
  <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
 <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
-<%@include file="./nav.jsp"%>
+<%@include file="../../../jsp/nav.jsp"%>
 
 <div style="width:500px;margin:0px auto;text-align:center">
 	<table class="table">
@@ -39,5 +39,13 @@
 		<a href="?start=${page.start+page.count}">下一页</a>
 		<a href="?start=${page.last}">末  页</a>
 	</div>
+	<div style="text-align:center;margin-top:40px">
+		
+		<form method="post" action="addCategory">
+			分类名称： <input name="name" value="" type="text"> <br><br>
+			<input type="submit" value="增加分类">
+		</form>
+
+	</div>	
  </div>
   

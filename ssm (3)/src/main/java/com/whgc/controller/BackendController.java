@@ -45,7 +45,8 @@ public class BackendController {
 	}
 	@RequestMapping("/login2Backend")
 	public String login2Backend(User user, Model model,HttpSession session) {
-		String user1 = MapperUtil.getByNameAndPW(user.getName(), user.getPassword());
+//		String user1 = MapperUtil.getByNameAndPW(user.getName(), user.getPassword());
+		User user1 = userMapper.getBynp(user.getName(), user.getPassword());
 		User user2=new User();
 		user2.setName(user.getName());
 		if (null == user1) {
@@ -55,20 +56,49 @@ public class BackendController {
 			model.addAttribute("user2", user2);
 			session.setAttribute("user2", user2);
 			return "backendIndex";
-			//重定向报错 未解决
-//			return "redirect:backendIndex";
+	
 		}
 
 	}
 	//----------------------------------
-	//后台管理的跳转页面
+	//category后台管理的跳转页面
 	@RequestMapping("/categoryMana")
-	public String categoryMana(Model model,HttpSession session) {
-		java.util.List<Category>cs=categoryMapper.list();
+	public String categoryMana(Model model,HttpSession session,Page page) {
+		int total=categoryMapper.getTotal();
+		java.util.List<Category>cs=categoryMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("cs", cs);
 		session.getAttribute("user2");
-		return "category";
+		return "mana/categoryMana/listcategory";
 
 	}
+	@RequestMapping("/addCategory")
+	public String addCategory(Category category,HttpSession session) {
+		categoryMapper.add(category);
+		//重定向是mappingURL再到具体页面    转发是具体页面
+		return "redirect:categoryMana";
+
+	}
+	@RequestMapping("/deleteCategory")
+	public String delCategory(Category category) {
+		categoryMapper.delete(category.getId());;
+		//重定向是mappingURL再到具体页面    转发是具体页面
+		return "redirect:categoryMana";
+
+	}
+	@RequestMapping("/editCategory")
+	public String editCategory(Category category,HttpSession session) {
+		Category c=categoryMapper.get(category.getId());;
+		session.setAttribute("c", c);
+		return "mana/categoryMana/editcategory";
+
+	}
+	@RequestMapping("updateCategory")
+	public String updateCategory(Category category){
+		categoryMapper.update(category);
+		return "redirect:categoryMana";
+		
+	}	
+	//paper后台管理的跳转页面
+	
 
 }
