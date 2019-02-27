@@ -26,4 +26,11 @@
 	     <select id="getByPid" parameterType="_int" resultType="Review">
 	        select * from   Review_    where pid= #{pid}     
 	    </select>
+	    	     <select id="listByPage" parameterType="_int" resultType="Review">
+	        select * from   Review_  limit #{0} , #{1}  
+	    </select>
+	    
+	    <select id="getTotal"  resultType="int">
+	        select count(*) from Review_
+	    </select>
 	</mapper>

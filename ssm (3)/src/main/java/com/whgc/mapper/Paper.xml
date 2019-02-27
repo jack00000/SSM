@@ -22,4 +22,11 @@
 	    <select id="list" resultType="Paper">
 	        select * from   Paper_      
 	    </select>
+	      <select id="listByPage" parameterType="_int" resultType="Paper">
+	        select * from   Paper_  limit #{0} , #{1}  
+	    </select>
+	    
+	    <select id="getTotal"  resultType="int">
+	        select count(*) from Paper_
+	    </select>
 	</mapper>

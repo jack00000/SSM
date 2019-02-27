@@ -16,4 +16,8 @@ public interface ReviewMapper {
 	public List<Review> list();
 	
 	public List<Review> getByPid(int pid);
+
+	public List<Review> listByPage(int start, int end);
+
+	public int getTotal();
 }

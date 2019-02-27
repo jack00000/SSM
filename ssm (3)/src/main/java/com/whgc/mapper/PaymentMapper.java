@@ -14,4 +14,8 @@ public interface PaymentMapper {
 	public int update(Payment Payment);
 
 	public List<Payment> list();
+
+	public List<Payment> listByPage(int start, int end);
+
+	public int getTotal();
 }
