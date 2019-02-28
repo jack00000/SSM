@@ -4,6 +4,21 @@ public class User {
 	private int id;
 	private String name;
 	private String email;
+	private String github;
+	private String avatarURL;
+	
+	public String getAvatarURL() {
+		return avatarURL;
+	}
+	public void setAvatarURL(String avatarURL) {
+		this.avatarURL = avatarURL;
+	}
+	public String getGithub() {
+		return github;
+	}
+	public void setGithub(String github) {
+		this.github = github;
+	}
 	private String password;
 	public int getId() {
 		return id;

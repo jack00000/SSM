@@ -65,14 +65,23 @@ public class BackendController {
 		}
 
 	}
+	@RequestMapping("backendIndex")
+	public String backendIndex(){
+		return "backendIndex";
+	}
 	//----------------------------------
 	//category后台管理的跳转页面
 	@RequestMapping("/categoryMana")
 	public String categoryMana(Model model,HttpSession session,Page page) {
 		int total=categoryMapper.getTotal();
+		page.caculateLast(total);
+		if(page.getStart()<0){
+			page.setStart(0);
+		}	
 		java.util.List<Category>cs=categoryMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("cs", cs);
 		session.getAttribute("user2");
+		session.setAttribute("page", page);
 		return "mana/categoryMana/listcategory";
 
 	}
@@ -104,9 +113,13 @@ public class BackendController {
 		
 	}	
 	//paper后台管理的跳转页面
-	@RequestMapping("/PaperMana")
+	@RequestMapping("/paperMana")
 	public String PaperMana(Model model,HttpSession session,Page page) {
 		int total=paperMapper.getTotal();
+		page.caculateLast(total);
+		if(page.getStart()<0){
+			page.setStart(0);
+		}	
 		page.caculateLast(total);
 		java.util.List<Paper>papers=paperMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("papers", papers);
@@ -144,9 +157,13 @@ public class BackendController {
 		
 	}	
 	//review 后台管理
-	@RequestMapping("/ReviewMana")
+	@RequestMapping("/reviewMana")
 	public String ReviewMana(Model model,HttpSession session,Page page) {
 		int total=reviewMapper.getTotal();
+		page.caculateLast(total);
+		if(page.getStart()<0){
+			page.setStart(0);
+		}	
 		page.caculateLast(total);
 		java.util.List<Review>cs=reviewMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("cs", cs);
@@ -183,9 +200,13 @@ public class BackendController {
 		
 	}	
 	//payment后台管理
-	@RequestMapping("/PaymentMana")
+	@RequestMapping("/paymentMana")
 	public String PaymentMana(Model model,HttpSession session,Page page) {
 		int total=paymentMapper.getTotal();
+		page.caculateLast(total);
+		if(page.getStart()<0){
+			page.setStart(0);
+		}	
 		page.caculateLast(total);
 		java.util.List<Payment>cs=paymentMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("cs", cs);
@@ -222,9 +243,13 @@ public class BackendController {
 		
 	}	
 	//用户哦后台管理
-	@RequestMapping("/UserMana")
+	@RequestMapping("/userMana")
 	public String UserMana(Model model,HttpSession session,Page page) {
 		int total=userMapper.getTotal();
+		page.caculateLast(total);
+		if(page.getStart()<0){
+			page.setStart(0);
+		}	
 		page.caculateLast(total);
 		java.util.List<User>cs=userMapper.listByPage(page.getStart(),page.getStart()+page.getCount());
 		model.addAttribute("cs", cs);

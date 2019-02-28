@@ -17,10 +17,22 @@
 							name
 						</th>
 						<th>
+							password
+						</th>
+						<th>
+							email
+						</th>
+						<th>
+							github
+						</th>
+						<th>
+							avatarURL
+						</th>
+						<th>
 							edit
 						</th>
 						<th>
-							delete
+							delt
 						</th>
 					</tr>
 				</thead>
@@ -28,6 +40,11 @@
 	        <tr class="info">
 	            <td>${c.id}</td>
 	            <td>${c.name}</td>
+	            <td>${c.password}</td>
+	            <td>${c.email}</td>
+	            <td>${c.github}</td>
+	            <td>${c.avatarURL}</td>
+	  
 	            <td><a href="editCategory?id=${c.id}">编辑</a></td>
 	            <td><a href="deleteCategory?id=${c.id}">删除</a></td>
 	        </tr>

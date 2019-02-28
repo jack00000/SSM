@@ -26,5 +26,12 @@
 	      <select id="getBynp" parameterType="string" resultType="User">
 	        select * from   User_  where name=#{0} and password=#{1}   
 	    </select>
+	         <select id="listByPage" parameterType="_int" resultType="User">
+	        select * from   User_  limit #{0} , #{1}  
+	    </select>
+	    
+	    <select id="getTotal"  resultType="int">
+	        select count(*) from User_
+	    </select>
 	</mapper>
 

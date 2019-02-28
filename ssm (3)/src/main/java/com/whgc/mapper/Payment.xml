@@ -22,4 +22,12 @@
 	    <select id="list" resultType="Payment">
 	        select * from   Payment_      
 	    </select>
+	    
+	    <select id="listByPage" parameterType="_int" resultType="Payment">
+	        select * from   Payment_  limit #{0} , #{1}  
+	    </select>
+	    
+	    <select id="getTotal"  resultType="int">
+	        select count(*) from Payment_
+	    </select>
 	</mapper>
