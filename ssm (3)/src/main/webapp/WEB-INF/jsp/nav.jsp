@@ -34,3 +34,25 @@
 				
 			</nav>
 </div>
+<style>
+body
+{
+	background-image:url('https://api.xygeng.cn/bing/1366.php'); 
+}
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+</style> 
+
+<script>
+$(document).ready(function(){
+
+		$.ajax({url:"demo_test.txt",success:function(result){
+			$("#div1").html(result);
+		}});
+});
+</script>
+ 

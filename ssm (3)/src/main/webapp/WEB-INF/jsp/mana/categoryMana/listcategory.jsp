@@ -5,7 +5,7 @@
 <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 <%@include file="../../../jsp/nav.jsp"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div style="width:500px;margin:0px auto;text-align:center">
 	<table class="table">
 	    <thead>
@@ -25,12 +25,23 @@
 					</tr>
 				</thead>
 	    <c:forEach items="${cs}" var="c" varStatus="st">
-	        <tr class="info">
+	      <c:choose>
+		   <c:when test="${c.id==1}">  
+		    <tr class="info">
 	            <td>${c.id}</td>
 	            <td>${c.name}</td>
 	            <td><a href="editCategory?id=${c.id}">编辑</a></td>
 	            <td><a href="deleteCategory?id=${c.id}">删除</a></td>
-	        </tr>
+	        </tr>     
+		   </c:when>
+		   <c:otherwise> 
+		  
+		   </c:otherwise>
+		 </c:choose>
+	      
+	        
+	    
+	        
 	    </c:forEach>
 	</table>
 	<div style="text-align:center">

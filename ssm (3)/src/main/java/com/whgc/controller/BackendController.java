@@ -3,6 +3,7 @@ package com.whgc.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -259,8 +260,9 @@ public class BackendController {
 
 	}
 	@RequestMapping("/addUser")
-	public String addUser(User User,HttpSession session) {
-		userMapper.add(User);
+	public String addUser(User user,HttpSession session) {
+		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+		userMapper.add(user);
 		//重定向是mappingURL再到具体页面    转发是具体页面
 		return "redirect:UserMana";
 

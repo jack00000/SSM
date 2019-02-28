@@ -14,20 +14,33 @@
 							id
 						</th>
 						<th>
-							name
+							pid
+						</th>
+						<th>
+							payMan
+						</th>
+						<th>
+							getMan
+						</th>
+						<th>
+							payNum
 						</th>
 						<th>
 							edit
 						</th>
 						<th>
-							delete
+							delt
 						</th>
+						
 					</tr>
 				</thead>
 	    <c:forEach items="${cs}" var="c" varStatus="st">
 	        <tr class="info">
 	            <td>${c.id}</td>
-	            <td>${c.name}</td>
+	            <td>${c.pid}</td>
+	            <td>${c.payMan}</td>
+	            <td>${c.getMan}</td>
+	            <td>${c.payNum}</td>
 	            <td><a href="editCategory?id=${c.id}">编辑</a></td>
 	            <td><a href="deleteCategory?id=${c.id}">删除</a></td>
 	        </tr>

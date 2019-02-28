@@ -5,7 +5,7 @@
 
 	<mapper namespace="com.whgc.mapper.UserMapper">
 	    <insert id="add" parameterType="User" >
-	        insert into User_ ( name ) values (#{name})    
+	        insert into User_ ( name ,password) values (#{name},#{password})    
 	    </insert>
 	    
 	    <delete id="delete" parameterType="User" >
