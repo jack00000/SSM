@@ -60,6 +60,73 @@ public class IndexController {
      * @throws FileNotFoundException
      * @throws IOException
      */
+	@RequestMapping("/getApiBikeData.do")
+	public String getApiData(){
+		List<Map<String,Object>>maps=new ArrayList<>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("Id", "1");
+		map.put("CompanyId", "2");
+		map.put("Code", "sample string 3");
+		map.put("License", "sample string 4");
+		map.put("LaunchDate"," 2019-03-01T13:41:09.6719004+08:00");
+		map.put("State", "6");
+		map.put("UpdateTime", "2019-03-01T13:41:09.6719004+08:00");
+		map.put("UploadTime", "2019-03-01T13:41:09.6719004+08:00");
+		map.put("History", "true");
+		Map<String,Object> map1 = new HashMap<String,Object>();
+		map1.put("Id", "1");
+		map1.put("CompanyId", "2");
+		map1.put("Code", "sample string 3");
+		map1.put("License", "sample string 4");
+		map1.put("LaunchDate"," 2019-03-01T13:41:09.6719004+08:00");
+		map1.put("State", "6");
+		map1.put("UpdateTime", "2019-03-01T13:41:09.6719004+08:00");
+		map1.put("UploadTime", "2019-03-01T13:41:09.6719004+08:00");
+		map1.put("History", "true");
+		maps.add(map);
+		
+		maps.add(map1);
+		
+		return JSONObject.toJSONString(maps);
+		
+	}
+	@RequestMapping("/getApiCompanyData.do")
+	public String getApiCompanyData(){
+		List<Map<String,Object>>maps=new ArrayList<>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("Id", "1");
+		map.put("CompanyId", "2");
+		map.put("Name", "sample string 3");
+		map.put("Identifier", "sample string 4");
+		map.put("BusinessScope","sample string 5");
+		map.put("ContactAddress", "sample string 6");
+		map.put("Regcapital", "sample string 7");
+		map.put("LegalName", "sample string 8");
+		map.put("LegalId", "sample string 9");
+		map.put("Status", "10");
+		map.put("UpdateTime", "2019-03-04T10:01:59.3195913+08:00");
+		map.put("UploadTime", "2019-03-04T10:01:59.3205972+08:00");
+		map.put("History", "true");
+		Map<String,Object> map1 = new HashMap<String,Object>();
+		map1.put("Id", "1");
+		map1.put("CompanyId", "2");
+		map1.put("Name", "sample string 3");
+		map1.put("Identifier", "sample string 4");
+		map1.put("BusinessScope","sample string 5");
+		map1.put("ContactAddress", "sample string 6");
+		map1.put("Regcapital", "sample string 7");
+		map1.put("LegalName", "sample string 8");
+		map1.put("LegalId", "sample string 9");
+		map1.put("Status", "10");
+		map1.put("UpdateTime", "2019-03-04T10:01:59.3195913+08:00");
+		map1.put("UploadTime", "2019-03-04T10:01:59.3205972+08:00");
+		map1.put("History", "true");
+		maps.add(map);
+		maps.add(map1);
+		
+		return JSONObject.toJSONString(maps);
+		
+	}
 	@RequestMapping("/prepareData")
 	public String prepareDate() throws FileNotFoundException, IOException{
 		//1.把所有的md文件内容转换为 html格式存在文件中

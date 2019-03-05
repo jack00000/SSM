@@ -1,3 +1,4 @@
+<%@page import="org.aspectj.weaver.ast.Var"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
  
@@ -5,20 +6,37 @@
  <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
 <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
- 
+<!-- jsp定义全局变量 -->
+<%!String name = "张小白";%>
 <style>
 body
 {
-	background-image:url('https://api.xygeng.cn/bing/1366.php'); 
+	background-image:url('${url}'); 
 }
 
 </style> 
 
 <script>
+$(function(){    
+    $.ajax({    
+        //请求方式    
+        type:"GET",    
+        //文件位置    
+        url:"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN",  
+        //返回数据格式为json,也可以是其他格式如    
+        dataType: "json",    
+        //请求成功后要执行的函数，拼接html    
+        success: function(data){    
+        	data.images[n].url = data.images[n].url.replace('1920x1080', '1080x1920');
+			var url = 'https://www.bing.com' + data.images[n].url;
+            $("div").append(str);    
+        }    
+    });    
+});    
 $(document).ready(function(){
 
-		$.ajax({url:"demo_test.txt",success:function(result){
-			$("#div1").html(result);
+		$.ajax({url:"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN",success:function(data){
+			var url = 'https://www.bing.com' + data.images[n].url;debugger;
 		}});
 });
 </script>
@@ -48,7 +66,7 @@ $(document).ready(function(){
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" >
             <div class="row row-centered">
                 <div class="well col-md-6 col-centered">
                     <h2>欢迎登录</h2>
