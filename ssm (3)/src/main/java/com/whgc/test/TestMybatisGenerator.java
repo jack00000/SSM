@@ -9,7 +9,11 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
- 
+/**
+ * 
+ * @author esesoft
+ *
+ */
 public class TestMybatisGenerator {
  
     public static void main(String[] args) throws Exception {

@@ -1,0 +1,2 @@
+[com.whgc.test]
+HutoolCronTask.run = */20 * * * * ?
