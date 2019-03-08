@@ -17,11 +17,13 @@ import org.jsoup.select.Elements;
  *
  */
 public class MySearchTest {
-	private static String url = "https://blog.csdn.net";
+//	private static String url = "https://blog.csdn.net";
+	private static String url = "https://www.codeproject.com";
 	private static String blogName = "guoxiaolongonly";
 
 	public static void main(String[] args) {
-		getArticleListFromUrl(url);
+//		getArticleListFromUrl(url);
+		getArticleByUrl(url);
 	}
 
 	/**
@@ -45,7 +47,7 @@ public class MySearchTest {
 		for (Element element : elements) {
 			if(element!=null){
 				final String relHref = element.attr("href"); // ==
-				if(relHref.startsWith("https://")){
+				if(relHref.startsWith("/Articles")){
 					paperUrls.add(relHref);	
 				}
 					
@@ -65,7 +67,7 @@ public class MySearchTest {
 		}
 		
 		for (String paper : paperUrls) {
-			System.out.println(paper.toString());
+			System.out.println(paper.replace("/Articles", url+"/Articles"));
 			
 		}
 //		if (!isStop) {
@@ -91,7 +93,7 @@ public class MySearchTest {
 	public static void getArticleFromUrl(String detailurl) {
 		try {
 			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000).post();
-			Element elementTitle = document.getElementsByClass("link_title").first();// 标题。
+			Element elementTitle = document.getElementsByClass("text-truncate oneline").first();// 标题。
 																						// 这边根据class的内容来过滤
 			System.out.println(elementTitle.text());
 			String filename = elementTitle.text().replaceAll("/", "或");
@@ -133,5 +135,20 @@ public class MySearchTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 根据文章url 获取文章html
+	 */
+	public static String getArticleByUrl(String url){
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url)
+					.userAgent(
+							"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36")
+					.timeout(3000).post();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return doc.outerHtml();
 	}
 }

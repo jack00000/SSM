@@ -27,6 +27,7 @@ import com.whgc.pojo.Review;
 import com.whgc.pojo.Tags;
 import com.whgc.pojoData.IndexData;
 import com.whgc.pojoData.IndexPaperDetailData;
+import com.whgc.test.MySearchTest;
 import com.whgc.util.Md2html;
 import com.whgc.util.Page;
 
@@ -267,6 +268,19 @@ public class IndexController {
 		}
 				
 	}
-	
+	/**
+	 * 将html传到前端 在前端解析  测试方法
+	 */
+	@RequestMapping("/htmlTest")
+	public String htmlTest(){
+		//本地博客导入
+		String string=Md2html.markdown2Html(new File("D:\\index.md"));
+		String utf8="<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">";
+		return JSONObject.toJSONString(utf8+string);
+		
+		//网上爬取
+//		String url="https://www.codeproject.com/Articles/668223/Python-Code-Generator-Written-in-Python";
+//		return JSONObject.toJSONString(MySearchTest.getArticleByUrl(url));
+	}
 
 }

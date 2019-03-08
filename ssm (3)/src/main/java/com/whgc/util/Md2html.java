@@ -28,7 +28,7 @@ public class Md2html {
 	 * @param file
 	 * @return
 	 */
-	public static void main() {
+	public static void main(String[] args) {
 		System.out.println(markdown2Html(new File("D:\\index.md")));
 	}
 	public static String markdown2Html(File file){
