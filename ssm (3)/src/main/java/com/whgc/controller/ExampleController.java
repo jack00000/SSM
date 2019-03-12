@@ -20,7 +20,7 @@ public class ExampleController {
 	@Autowired
 	CategoryMapper categoryMapper;
 
-	@RequestMapping("/admin")
+	@RequestMapping(value="/admin",produces="application/json; charset=utf-8")
 	public String listCategory(Page page) {
 		List<Category> cs = categoryMapper.list();
 		return JSONObject.toJSONString(cs);

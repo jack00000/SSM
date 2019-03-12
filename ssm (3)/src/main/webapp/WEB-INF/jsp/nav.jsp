@@ -35,15 +35,11 @@
 			</nav>
 </div>
 <style>
+
 body
 {
-	background-image:url('https://api.xygeng.cn/bing/1366.php'); 
-}
-.center {
-    margin: auto;
-    width: 60%;
-    border: 3px solid #73AD21;
-    padding: 10px;
+	background-image:url('https://source.unsplash.com/random'); 
+	background-size:100% 100%;
 }
 </style> 
 

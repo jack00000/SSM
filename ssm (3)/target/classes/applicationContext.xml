@@ -55,6 +55,7 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.whgc.mapper"/>
 	</bean>
+	<bean id="utils" class="com.whgc.util.Utils" init-method="init"></bean>
 	
 
 

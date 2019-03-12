@@ -32,4 +32,5 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    <bean id="utils" class="com.whgc.util.Utils" init-method="init"></bean>
 </beans>

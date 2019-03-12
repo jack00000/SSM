@@ -33,6 +33,23 @@ public class MapperUtil {
 	public static void main(String[] args) {
 		getByNameAndPW("demo1","pw1");
 	}
+	/**
+	 * 执行sql语句
+	 * @throws SQLException 
+	 */
+	public static String  exeSql (String sql) throws SQLException {
+		String result=null;
+    	Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		conn.setAutoCommit(false);
+		pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next()){
+			result=rs.getString("id");
+		}
+		return result;
+		
+	}
 
 }
 

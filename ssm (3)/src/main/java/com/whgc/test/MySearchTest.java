@@ -1,8 +1,5 @@
 package com.whgc.test;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,27 +8,39 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.whgc.mapper.PaperMapper;
+import com.whgc.mapper.UserMapper;
+import com.whgc.pojo.Paper;
+import com.whgc.pojo.User;
+import com.whgc.util.Utils;
 /**
  * Jsoup 爬取网页数据
  * @author esesoft
  *
  */
 public class MySearchTest {
+//	@Autowired
+//	PaperMapper paperMapper;
+	@Autowired
+	UserMapper userMapper;
 //	private static String url = "https://blog.csdn.net";
 	private static String url = "https://www.codeproject.com";
-	private static String blogName = "guoxiaolongonly";
+//	private static String blogName = "guoxiaolongonly";
 
 	public static void main(String[] args) {
 //		getArticleListFromUrl(url);
-		getArticleByUrl(url);
+//		String teString="https://www.codeproject.com/Articles/1278992/Analyzing-Twitch-Channel-Viewership-with-Python-2";
+		String teString="https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
+        getArticleFromUrl(teString);
 	}
 
 	/**
 	 * 获取文章列表
-	 *
 	 * @param listurl
 	 */
-	public static void getArticleListFromUrl(final String listurl) {
+	public static List<String> getArticleListFromUrl(final String listurl) {
 		boolean isStop = false;
 		Document doc = null;
 		try {
@@ -65,11 +74,12 @@ public class MySearchTest {
 //			}
 			
 		}
-		
+		List<String>pList=new ArrayList<>();
 		for (String paper : paperUrls) {
-			System.out.println(paper.replace("/Articles", url+"/Articles"));
+			pList.add(paper.replace("/Articles", url+"/Articles"));
 			
 		}
+		return pList;
 //		if (!isStop) {
 //			new Thread(new Runnable() {
 //				@Override
@@ -93,14 +103,20 @@ public class MySearchTest {
 	public static void getArticleFromUrl(String detailurl) {
 		try {
 			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000).post();
-			Element elementTitle = document.getElementsByClass("text-truncate oneline").first();// 标题。
-																						// 这边根据class的内容来过滤
-			System.out.println(elementTitle.text());
-			String filename = elementTitle.text().replaceAll("/", "或");
-			Element elementContent = document.getElementsByClass("article_content").first();// 内容。
-			saveArticle(filename, elementContent.text(), blogName);
-			// String Content =elementContent.te xt().replaceAll(" ", "\t");
-			// System.out.println(elementContent.text()+"\n");
+			Element elementTitle = document.getElementById("ctl00_ArticleTitle");// title
+			Element elementDes=document.getElementById("ctl00_description");//description	
+			Element elementContent = document.getElementsByClass("article").first();// 这边根据class的内容来过滤
+			Element elementtag=document.getElementById("ctl00_TagList_VisibleTags");
+			String author=document.getElementsByClass("author").text();
+			String[] fields=detailurl.split("\\.");
+			String cate=fields[1];
+			String title = elementTitle.text();
+			String description=elementDes.text();
+			String imgrandom="https://source.unsplash.com/random";
+			String content=elementContent.outerHtml();
+			String tags=elementtag.text();
+			saveArticle(author,cate,title,description,imgrandom, content,tags);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,47 +124,21 @@ public class MySearchTest {
 	}
 
 	/**
-	 * 保存文章到本地
+	 * 保存文章到数据库
 	 * 
 	 * @param titile
 	 * @param content
 	 * @param blogName
 	 */
-	public static void saveArticle(String titile, String content, String blogName) {
-		String lujing = "d:\\MyLoadArticle\\" + blogName + "\\" + titile + ".txt";// 保存到本地的路径和文件名
-		File file = new File(lujing);
-		if (!file.getParentFile().exists()) {
-			file.getParentFile().mkdirs();
-		}
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			FileWriter fw = new FileWriter(file, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(content);
-			bw.flush();
-			bw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public static void saveArticle(String author,String cate,String titile,String description,String imgrandom, String content,String tags) {
+		User user=new User();
+		user.setName(author);
+		Utils utils=new Utils();
+//		utils.usermapper.add(user);
+		String sql="select id from user_ where name="+author;
+//		String uid=MapperUtil.exeSql(sql);
+		Paper paper=new Paper();
+//		paper.setCid(cid);
 	}
-	/**
-	 * 根据文章url 获取文章html
-	 */
-	public static String getArticleByUrl(String url){
-		Document doc = null;
-		try {
-			doc = Jsoup.connect(url)
-					.userAgent(
-							"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36")
-					.timeout(3000).post();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return doc.outerHtml();
-	}
+	
 }
