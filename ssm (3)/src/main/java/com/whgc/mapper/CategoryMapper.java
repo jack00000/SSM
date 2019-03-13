@@ -23,7 +23,8 @@ public interface CategoryMapper {
     public List<Category> list();
     
     public List<Category> listByPage(int start, int end);
-    
+   
     public int getTotal();
+    public int getIdByName();
       
 }

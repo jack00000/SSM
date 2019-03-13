@@ -15,10 +15,10 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.whgc.controller">
-          <context:include-filter type="annotation" 
-          expression="org.springframework.stereotype.Controller"/>
+    <context:component-scan base-package="com.whgc.controller,com.whgc.util.*,com.whgc.test.*" >
+         
     </context:component-scan>
+     
 
     <mvc:annotation-driven />
     
@@ -32,5 +32,5 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
-    <bean id="utils" class="com.whgc.util.Utils" init-method="init"></bean>
+    <bean id="testUtils" class="com.whgc.util.TestUtils"> </bean>
 </beans>

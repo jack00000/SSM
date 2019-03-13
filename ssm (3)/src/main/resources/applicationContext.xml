@@ -17,6 +17,7 @@
 
    <context:annotation-config />
 	<context:component-scan base-package="com.whgc.service" />
+	  <context:component-scan base-package="com.whgc.util" />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 	  <property name="driverClassName">  
@@ -55,7 +56,7 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.whgc.mapper"/>
 	</bean>
-	<bean id="utils" class="com.whgc.util.Utils" init-method="init"></bean>
+
 	
 
 

@@ -8,39 +8,54 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.tools.classfile.StackMap_attribute.stack_map_frame;
+import com.whgc.mapper.CategoryMapper;
 import com.whgc.mapper.PaperMapper;
 import com.whgc.mapper.UserMapper;
+import com.whgc.pojo.Category;
 import com.whgc.pojo.Paper;
 import com.whgc.pojo.User;
-import com.whgc.util.Utils;
+import com.whgc.util.springTest.BaseJunit4Test;
+
 /**
  * Jsoup 爬取网页数据
+ * 
  * @author esesoft
  *
  */
-public class MySearchTest {
-//	@Autowired
-//	PaperMapper paperMapper;
+public class MySearchTest extends BaseJunit4Test {
 	@Autowired
-	UserMapper userMapper;
-//	private static String url = "https://blog.csdn.net";
-	private static String url = "https://www.codeproject.com";
-//	private static String blogName = "guoxiaolongonly";
+	private PaperMapper paperMapper;
+	@Autowired
+	private  CategoryMapper categoryMapper;
+	@Autowired
+	private  UserMapper userMapper;
+	// private  String url = "https://blog.csdn.net";
+	private  String url = "https://www.codeproject.com";
 
-	public static void main(String[] args) {
-//		getArticleListFromUrl(url);
-//		String teString="https://www.codeproject.com/Articles/1278992/Analyzing-Twitch-Channel-Viewership-with-Python-2";
-		String teString="https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
-        getArticleFromUrl(teString);
+	// private  String blogName = "guoxiaolongonly";
+	@Test
+	@Transactional // 标明此方法需使用事务
+	@Rollback(false) // 标明使用完此方法后事务不回滚,true时为回滚
+	public void test() {
+		// getArticleListFromUrl(url);
+		// String
+		// teString="https://www.codeproject.com/Articles/1278992/Analyzing-Twitch-Channel-Viewership-with-Python-2";
+		String teString = "https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
+		getArticleFromUrl(teString);
 	}
 
 	/**
 	 * 获取文章列表
+	 * 
 	 * @param listurl
 	 */
-	public static List<String> getArticleListFromUrl(final String listurl) {
+	public  List<String> getArticleListFromUrl(final String listurl) {
 		boolean isStop = false;
 		Document doc = null;
 		try {
@@ -54,45 +69,22 @@ public class MySearchTest {
 		Elements elements = doc.getElementsByTag("a");// 找到所有a标签
 		List<String> paperUrls = new ArrayList<>();
 		for (Element element : elements) {
-			if(element!=null){
+			if (element != null) {
 				final String relHref = element.attr("href"); // ==
-				if(relHref.startsWith("/Articles")){
-					paperUrls.add(relHref);	
+				if (relHref.startsWith("/Articles")) {
+					paperUrls.add(relHref);
 				}
-					
+
 			}
-											// "/"这个是href的属性值，一般都是链接。这里放的是文章的连接
-//			// 用if语句过滤掉不是文章链接的内容。因为文章的链接有两个，但评论的链接只有一个，反正指向相同的页面就拿评论的链接来用吧
-//			if (!relHref.startsWith("http://") && relHref.contains("details") && relHref.endsWith("comments")) {
-//				StringBuffer sb = new StringBuffer();
-//				sb.append(relHref);
-//				System.out.println(sb.substring(0, sb.length() - 9));// 去掉最后的#comment输出
-//				getArticleFromUrl(sb.substring(0, sb.length() - 9));// 可以通过这个url获取文章了
-//			}
-//			if (relHref.equals("https://mp.csdn.net//postlist")) {
-//				isStop = true;
-//			}
-			
+
 		}
-		List<String>pList=new ArrayList<>();
+		List<String> pList = new ArrayList<>();
 		for (String paper : paperUrls) {
-			pList.add(paper.replace("/Articles", url+"/Articles"));
-			
+			pList.add(paper.replace("/Articles", url + "/Articles"));
+
 		}
+
 		return pList;
-//		if (!isStop) {
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					if (!listurl.contains("list")) {
-//						getArticleListFromUrl(listurl + "/article/list/1");// 获取下一页的列表
-//					} else {
-//						getArticleListFromUrl(listurl.substring(0, listurl.length() - 1)
-//								+ (Integer.valueOf(listurl.substring(listurl.length() - 1, listurl.length())) + 1));// 获取下一页的列表
-//					}
-//				}
-//			}).start();
-//		}
 	}
 
 	/**
@@ -100,22 +92,22 @@ public class MySearchTest {
 	 * 
 	 * @param detailurl
 	 */
-	public static void getArticleFromUrl(String detailurl) {
+	public  void getArticleFromUrl(String detailurl) {
 		try {
 			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000).post();
 			Element elementTitle = document.getElementById("ctl00_ArticleTitle");// title
-			Element elementDes=document.getElementById("ctl00_description");//description	
+			Element elementDes = document.getElementById("ctl00_description");// description
 			Element elementContent = document.getElementsByClass("article").first();// 这边根据class的内容来过滤
-			Element elementtag=document.getElementById("ctl00_TagList_VisibleTags");
-			String author=document.getElementsByClass("author").text();
-			String[] fields=detailurl.split("\\.");
-			String cate=fields[1];
+			Element elementtag = document.getElementById("ctl00_TagList_VisibleTags");
+			String author = document.getElementsByClass("author").text();
+			String[] fields = detailurl.split("\\.");
+			String cate = fields[1];
 			String title = elementTitle.text();
-			String description=elementDes.text();
-			String imgrandom="https://source.unsplash.com/random";
-			String content=elementContent.outerHtml();
-			String tags=elementtag.text();
-			saveArticle(author,cate,title,description,imgrandom, content,tags);
+			String description = elementDes.text();
+			String imgrandom = "https://source.unsplash.com/random";
+			String content = elementContent.outerHtml();
+			String tags = elementtag.text();
+			saveArticle(author, cate, title, description, imgrandom, content, tags);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -130,15 +122,17 @@ public class MySearchTest {
 	 * @param content
 	 * @param blogName
 	 */
-	public static void saveArticle(String author,String cate,String titile,String description,String imgrandom, String content,String tags) {
-		User user=new User();
+	public  void saveArticle(String author, String cate, String titile, String description, String imgrandom,
+			String content, String tags) {
+		User user = new User();
 		user.setName(author);
-		Utils utils=new Utils();
-//		utils.usermapper.add(user);
-		String sql="select id from user_ where name="+author;
-//		String uid=MapperUtil.exeSql(sql);
-		Paper paper=new Paper();
-//		paper.setCid(cid);
+		userMapper.add(user);
+		Category category = new Category();
+		category.setName(cate);
+		Paper paper = new Paper();
+		// String cid=categoryMapper.getIdByName(cate);
+		// paper.setCid(cid);
+
 	}
-	
+
 }
