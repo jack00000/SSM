@@ -19,4 +19,5 @@ public interface TagsMapper {
     
     public List<Tags> getByPid(int pid);
       
+    public int getIdByName(String name) ;
 }

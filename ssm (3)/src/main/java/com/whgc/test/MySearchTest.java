@@ -1,5 +1,4 @@
 package com.whgc.test;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.tools.classfile.StackMap_attribute.stack_map_frame;
 import com.whgc.mapper.CategoryMapper;
 import com.whgc.mapper.PaperMapper;
+import com.whgc.mapper.TagsMapper;
 import com.whgc.mapper.UserMapper;
 import com.whgc.pojo.Category;
 import com.whgc.pojo.Paper;
+import com.whgc.pojo.Tags;
 import com.whgc.pojo.User;
 import com.whgc.util.springTest.BaseJunit4Test;
 
@@ -35,9 +35,10 @@ public class MySearchTest extends BaseJunit4Test {
 	private  CategoryMapper categoryMapper;
 	@Autowired
 	private  UserMapper userMapper;
+	@Autowired
+	private TagsMapper tagsMapper;
 	// private  String url = "https://blog.csdn.net";
 	private  String url = "https://www.codeproject.com";
-
 	// private  String blogName = "guoxiaolongonly";
 	@Test
 	@Transactional // 标明此方法需使用事务
@@ -74,14 +75,11 @@ public class MySearchTest extends BaseJunit4Test {
 				if (relHref.startsWith("/Articles")) {
 					paperUrls.add(relHref);
 				}
-
 			}
-
 		}
 		List<String> pList = new ArrayList<>();
 		for (String paper : paperUrls) {
 			pList.add(paper.replace("/Articles", url + "/Articles"));
-
 		}
 
 		return pList;
@@ -122,17 +120,64 @@ public class MySearchTest extends BaseJunit4Test {
 	 * @param content
 	 * @param blogName
 	 */
-	public  void saveArticle(String author, String cate, String titile, String description, String imgrandom,
+	public  void saveArticle(String author, String cate, String title, String description, String imgrandom,
 			String content, String tags) {
+		//从我网页爬取的信息 分别要插入 用户表 分类表 文章表 标签表  评论用微信小程序第三方插件 
+		//1.现在的问题:插入用户表后  因id是自增长的  在插入分类表 需要用到刚插入用户表的id 
+		//因为是通过名字来获取对应id 但名字可能相同 id就有多个  这样就会报错
+		//1.解决方法 插入前 判断用户名是否存在 存在 则不插入   (分类表 文章表不必如此)
+		//2.id就取0到10000的随机数  插入的时候判断下 这个id存不存在  在此之前 要判断这个用户名存不存在  存在则不插入
+		//插入user表
+//		Random random = new Random();
+//		int uid=(int)Math.floor((random.nextDouble()*10000.0)); 
+		int uid;
 		User user = new User();
 		user.setName(author);
-		userMapper.add(user);
+		if(userMapper.getIdByName(author)==0){
+			userMapper.add(user);
+			uid=userMapper.getIdByName(author);
+		}else {
+			uid=userMapper.getIdByName(author);
+		}
+
+		//插入cate表  这里的分类是 数据来源的不同
+//		int uid=userMapper.getIdByName(author);
+//		int cid=(int)Math.floor((random.nextDouble()*1000.0)); 
+		int cid;
 		Category category = new Category();
 		category.setName(cate);
-		Paper paper = new Paper();
-		// String cid=categoryMapper.getIdByName(cate);
-		// paper.setCid(cid);
+		if(categoryMapper.getIdByName(author)==0){
+			categoryMapper.add(category);
+			cid=categoryMapper.getIdByName(cate);
+		}else {
+			cid=categoryMapper.getIdByName(cate);
+		}
 
+		//插入文章表
+//		int pid=(int)Math.floor((random.nextDouble()*10000.0)); 
+		int pid;
+		Paper paper = new Paper();
+		paper.setUid(uid);
+		paper.setCid(cid);
+		paper.setDescription(description);
+		paper.setTitle(title);
+		paper.setContent(content);
+		if(paperMapper.getIdByName(title)==0){
+			paperMapper.add(paper);
+			pid=paperMapper.getIdByName(title);
+		}else {
+			pid=paperMapper.getIdByName(title);
+		}
+		//插入标签表
+		String[] fields=tags.split(" ");
+		for(String s:fields){
+			Tags tag=new Tags();
+			tag.setPid(pid);
+			tag.setName(s);
+			tagsMapper.add(tag);
+		}
+		
 	}
+	
 
 }

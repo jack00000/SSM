@@ -18,4 +18,6 @@ public interface PaperMapper {
 	public List<Paper> listByPage(int start, int end);
 
 	public int getTotal();
+	
+	public int getIdByName(String name);
 }

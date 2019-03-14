@@ -22,5 +22,7 @@ public interface UserMapper {
 	    public List<User> listByPage(int start, int end);
 	    
 	    public int getTotal();
+	    
+	    public int getIdByName(String name);
 	   
 }

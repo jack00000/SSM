@@ -33,5 +33,8 @@
 	    <select id="getTotal"  resultType="int">
 	        select count(*) from User_
 	    </select>
+	     <select id="getIdByName" parameterType="string" resultType="int">
+	        select id from User_ where name=#{name}
+	    </select>
 	</mapper>
 

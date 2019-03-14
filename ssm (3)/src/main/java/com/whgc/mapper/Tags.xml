@@ -25,4 +25,7 @@
 	     <select id="getByPid" parameterType="_int" resultType="Tags">
 	        select * from   Tags_ where pid = #{pid}  
 	    </select>
+	     <select id="getIdByName" parameterType="string" resultType="int">
+	        select id from   Tags_
+	    </select>
 	</mapper>

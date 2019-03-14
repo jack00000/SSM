@@ -15,7 +15,11 @@ CREATE TABLE user_ (
   avatarURL varchar(255) DEFAULT NULL COMMENT "用户头像",
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT "用户表";
- 
+/*
+ Target Server Type    : MySQL
+ Date: 21/02/2019 10:08:51
+ 这里的分类是不同数据源的分类 eg:csdn codeproject等网站
+*/
 CREATE TABLE category_ (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT "分类id",
   name varchar(255) DEFAULT NULL COMMENT "分类名",

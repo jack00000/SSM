@@ -29,4 +29,8 @@
 	    <select id="getTotal"  resultType="int">
 	        select count(*) from Paper_
 	    </select>
+	    
+	     <select id="getIdByName" parameterType="string" resultType="int">
+	        select id from Paper_ where title=#{name}
+	    </select>
 	</mapper>
