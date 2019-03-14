@@ -25,6 +25,6 @@ public interface CategoryMapper {
     public List<Category> listByPage(int start, int end);
    
     public int getTotal();
-    public int getIdByName();
+    public int getIdByName(String name);
       
 }
