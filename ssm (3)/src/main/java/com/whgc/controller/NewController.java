@@ -16,18 +16,18 @@ import com.whgc.pojo.Paper;
  */
 @Controller
 @ResponseBody
-@RequestMapping("")
-public class AddController {
+@RequestMapping("new")
+public class NewController {
 	@Autowired
 	PaperMapper paperMapper;
-    /**
-     * 获取微信小程序后台的数据并插入数据库
-     * @param paper
-     * @return
-     */
+
+	/**
+	 * 获取微信小程序后台的数据并插入数据库
+	 * @param paper
+	 * @return
+	 */
 	@RequestMapping("/insertPaper")
-	public String listCategory(Paper paper) {
+	public void listCategory(Paper paper) {
 		paperMapper.add(paper);
-		return null;
-}
+	}
 }

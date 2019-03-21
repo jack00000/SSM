@@ -23,6 +23,9 @@ import com.whgc.pojo.Tags;
 import com.whgc.pojo.User;
 import com.whgc.util.springTest.BaseJunit4Test;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.cron.CronUtil;
+
 /**
  * Jsoup 爬取网页数据
  * 
@@ -30,6 +33,22 @@ import com.whgc.util.springTest.BaseJunit4Test;
  *
  */
 public class MySearchTest extends BaseJunit4Test {
+	public static void main(String[] args) {
+		CronUtil.setMatchSecond(true);
+        CronUtil.start();
+ 
+        CronUtil.schedule("*/2 * * * * ?",new Runnable() {
+             
+            @Override
+            public void run() {
+                System.out.println(DateUtil.now()+ " 执行新任务");
+                //
+                MySearchTest test=new MySearchTest();
+                test.test();
+                 
+            }
+        });
+	}
 	@Autowired
 	private PaperMapper paperMapper;
 	@Autowired
@@ -39,17 +58,38 @@ public class MySearchTest extends BaseJunit4Test {
 	@Autowired
 	private TagsMapper tagsMapper;
 	// private  String url = "https://blog.csdn.net";
-	private  String url = "https://www.codeproject.com";
+	private  String codeproject = "https://www.codeproject.com";
 	// private  String blogName = "guoxiaolongonly";
 	@Test
 	@Transactional // 标明此方法需使用事务
 	@Rollback(false) // 标明使用完此方法后事务不回滚,true时为回滚
 	public void test() {
-		// getArticleListFromUrl(url);
+//		CronUtil.setMatchSecond(true);
+//        CronUtil.start();
+// 
+//        CronUtil.schedule("*/20 * * * * ?",new Runnable() {
+//             
+//            @Override
+//            public void run() {
+//            	System.out.println("执行新任务");
+                exeTask();
+//                 
+//            }
+//        });
+		
+	}
+	/**
+	 * 从网站爬取数据存到数据库
+	 */
+	public void exeTask(){
+		 List<String>aList=getArticleListFromUrlCodeproject(codeproject);
+		 for(String s:aList){
+			 getArticleFromUrl(s);
+		 }
 		// String
 		// teString="https://www.codeproject.com/Articles/1278992/Analyzing-Twitch-Channel-Viewership-with-Python-2";
-		String teString = "https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
-		getArticleFromUrl(teString);
+//		String teString = "https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
+//		getArticleFromUrl(teString);
 	}
 
 	/**
@@ -57,7 +97,7 @@ public class MySearchTest extends BaseJunit4Test {
 	 * 
 	 * @param listurl
 	 */
-	public  List<String> getArticleListFromUrl(final String listurl) {
+	public  List<String> getArticleListFromUrlCodeproject(final String listurl) {
 		boolean isStop = false;
 		Document doc = null;
 		try {
@@ -80,7 +120,7 @@ public class MySearchTest extends BaseJunit4Test {
 		}
 		List<String> pList = new ArrayList<>();
 		for (String paper : paperUrls) {
-			pList.add(paper.replace("/Articles", url + "/Articles"));
+			pList.add(paper.replace("/Articles", codeproject + "/Articles"));
 		}
 
 		return pList;
@@ -98,18 +138,18 @@ public class MySearchTest extends BaseJunit4Test {
 			Element elementDes = document.getElementById("ctl00_description");// description
 			Element elementContent = document.getElementsByClass("article").first();// 这边根据class的内容来过滤
 			Element elementtag = document.getElementById("ctl00_TagList_VisibleTags");
+			Element img=document.getElementById("ctl00_avatar");
 			String author = document.getElementsByClass("author").text();
 			String[] fields = detailurl.split("\\.");
 			String cate = fields[1];
 			String title = elementTitle.text();
 			String description = elementDes.text();
-			String imgrandom = "https://source.unsplash.com/random";
+			String imgrandom = img.attr("src");
 			String content = elementContent.outerHtml();
 			String tags = elementtag.text();
 			saveArticle(author, cate, title, description, imgrandom, content, tags);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -136,12 +176,6 @@ public class MySearchTest extends BaseJunit4Test {
 		user.setName(author);
 		//mapper查不出来就会报错....
 //		int id=userMapper.getIdByName(author);
-//		if(userMapper.getIdByName(author)==0){
-//			userMapper.add(user);
-//			uid=userMapper.getIdByName(author);
-//		}else {
-//			uid=userMapper.getIdByName(author);
-//		}
 		try {
 			uid=userMapper.getIdByName(author);
 		} catch (Exception e) {
@@ -150,17 +184,11 @@ public class MySearchTest extends BaseJunit4Test {
 		}
 
 		//插入cate表  这里的分类是 数据来源的不同
-//		int uid=userMapper.getIdByName(author);
-//		int cid=(int)Math.floor((random.nextDouble()*1000.0)); 
+
 		int cid;
 		Category category = new Category();
 		category.setName(cate);
-//		if(categoryMapper.getIdByName(author)==0){
-//			categoryMapper.add(category);
-//			cid=categoryMapper.getIdByName(cate);
-//		}else {
-//			cid=categoryMapper.getIdByName(cate);
-//		}
+
 		try {
 			cid=categoryMapper.getIdByName(cate);
 		} catch (Exception e) {
@@ -180,12 +208,7 @@ public class MySearchTest extends BaseJunit4Test {
 		paper.setWordSum("12345");
 		paper.setContent(content);
 		paper.setDescription(description);
-//		if(paperMapper.getIdByName(title)==0){
-//			paperMapper.add(paper);
-//			pid=paperMapper.getIdByName(title);
-//		}else {
-//			pid=paperMapper.getIdByName(title);
-//		}
+
 		try {
 			pid=paperMapper.getIdByName(title);
 		} catch (Exception e) {
