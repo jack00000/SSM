@@ -312,9 +312,3 @@ categories: 毕业设计
 
 ## 5.http://localhost:8080/ssm/getUpdatingsJson/postId
 - 获取根据id获取文章信息
-
-## 6.获取
-
-<h1 id="ctl00_ArticleTitle">Analyzing Twitch Channel Viewership with Python and Intel</h1>
-
-<div id="ctl00_description" class="summary">Jeff pulls together what he's learned about Python and Jupyter notebooks to do some analysis on the viewership of his Twitch channel.  What factors can he alter to increase viewership?</div>

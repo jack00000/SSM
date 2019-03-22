@@ -40,7 +40,7 @@ import com.whgc.util.Page;
  */
 @Controller
 @ResponseBody
-@RequestMapping("index")
+@RequestMapping("")
 public class IndexController {
 	@Autowired
 	PaperMapper paperMapper;
@@ -247,7 +247,7 @@ public class IndexController {
 			List<Review>comments=reviewMapper.getByPid(paper.getId());
 			indexDatas.setComments(comments);
 			String string=Md2html.markdown2Html(new File("D:\\index.md"));
-			indexDatas.setContent(paper.getContent());
+			indexDatas.setContent(string);
 			
 			//根据api文档规范数据格式  请求成功 请求 各返回什么
 			Map<String,Object> map = new HashMap<String,Object>();

@@ -15,7 +15,11 @@ CREATE TABLE user_ (
   avatarURL varchar(255) DEFAULT NULL COMMENT "用户头像",
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT "用户表";
- 
+/*
+ Target Server Type    : MySQL
+ Date: 21/02/2019 10:08:51
+ 这里的分类是不同数据源的分类 eg:csdn codeproject等网站
+*/
 CREATE TABLE category_ (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT "分类id",
   name varchar(255) DEFAULT NULL COMMENT "分类名",
@@ -26,8 +30,8 @@ CREATE TABLE property_ (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT "属性id",
   cid int(11) DEFAULT NULL COMMENT "外键：分类id",
   name varchar(255) DEFAULT NULL COMMENT "属性名",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_property_category FOREIGN KEY (cid) REFERENCES category_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_property_category FOREIGN KEY (cid) REFERENCES category_ (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT "属性名称表";
  
 CREATE TABLE paper_ (
@@ -38,19 +42,19 @@ CREATE TABLE paper_ (
   description varchar(255) DEFAULT NULL COMMENT "描述",
   updateTime varchar(255) DEFAULT NULL COMMENT "更新时间",
   wordSum varchar(255) DEFAULT NULL COMMENT "字数",
-  content Blob DEFAULT NULL COMMENT "正文",
+  content varchar(255) DEFAULT NULL COMMENT "正文",
   
-  PRIMARY KEY (id)
---  CONSTRAINT fk_paper_category FOREIGN KEY (cid) REFERENCES category_ (id),
---  CONSTRAINT fk_paper_user FOREIGN KEY (uid) REFERENCES user_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_paper_category FOREIGN KEY (cid) REFERENCES category_ (id),
+  CONSTRAINT fk_paper_user FOREIGN KEY (uid) REFERENCES user_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "文章表";
 
 CREATE TABLE tags_ (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT "标签id",
   pid int(11) DEFAULT NULL COMMENT "外键：文章id",
   name varchar(255) DEFAULT NULL COMMENT "标签名",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_tags_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_tags_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "标签表";
 
 
@@ -59,9 +63,9 @@ CREATE TABLE propertyvalue_ (
   pid int(11) DEFAULT NULL COMMENT "外键：文章id",
   ptid int(11) DEFAULT NULL COMMENT "外键：属性id",
   value varchar(255) DEFAULT NULL COMMENT "属性值",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_propertyvalue_property FOREIGN KEY (ptid) REFERENCES property_ (id),
---  CONSTRAINT fk_propertyvalue_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_propertyvalue_property FOREIGN KEY (ptid) REFERENCES property_ (id),
+  CONSTRAINT fk_propertyvalue_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "属性值表";
  
 CREATE TABLE paperimage_ (
@@ -69,8 +73,8 @@ CREATE TABLE paperimage_ (
   pid int(11) DEFAULT NULL COMMENT "外键：文章id",
   type varchar(255) DEFAULT NULL COMMENT "照片类型",
   imgPath varchar(255) DEFAULT NULL COMMENT "照片路径",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_paperimage_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_paperimage_paper FOREIGN KEY (pid) REFERENCES paper_ (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT "文章图片表";
  
 CREATE TABLE review_ (
@@ -79,9 +83,9 @@ CREATE TABLE review_ (
   uid int(11) DEFAULT NULL COMMENT "外键：用户id",
   pid int(11) DEFAULT NULL COMMENT "外键：文章id",
   createDate datetime DEFAULT NULL COMMENT "评论时间",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_review_paper FOREIGN KEY (pid) REFERENCES paper_ (id),
---  CONSTRAINT fk_review_user FOREIGN KEY (uid) REFERENCES user_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_review_paper FOREIGN KEY (pid) REFERENCES paper_ (id),
+  CONSTRAINT fk_review_user FOREIGN KEY (uid) REFERENCES user_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "评论表";
 
 CREATE TABLE news_ (
@@ -90,8 +94,8 @@ CREATE TABLE news_ (
   newsSum int(11) DEFAULT NULL COMMENT "消息数量",
   msg varchar(255) DEFAULT NULL COMMENT "消息内容",
   sendTime varchar(255) DEFAULT NULL COMMENT "发送时间",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_news_user FOREIGN KEY (uid) REFERENCES user_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_news_user FOREIGN KEY (uid) REFERENCES user_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "消息表";
  
 CREATE TABLE payment_ (
@@ -100,8 +104,8 @@ CREATE TABLE payment_ (
   payMan varchar(255) DEFAULT NULL COMMENT "打赏人",
   getMan varchar(255) DEFAULT NULL COMMENT "被打赏作者",
   payNum varchar(255) DEFAULT NULL COMMENT "支付金额",
-  PRIMARY KEY (id)
---  CONSTRAINT fk_payment_paper FOREIGN KEY (pid) REFERENCES user_ (id)
+  PRIMARY KEY (id),
+  CONSTRAINT fk_payment_paper FOREIGN KEY (pid) REFERENCES user_ (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT "消息表";
 -- ----------------------------
 -- data for test

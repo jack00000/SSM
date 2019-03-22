@@ -20,5 +20,4 @@ public interface PaperMapper {
 	public int getTotal();
 	
 	public int getIdByName(String name);
-	
 }

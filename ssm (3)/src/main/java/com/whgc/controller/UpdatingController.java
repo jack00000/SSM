@@ -15,7 +15,7 @@ import com.whgc.util.Page;
 
 @Controller
 @ResponseBody
-@RequestMapping("updating")
+@RequestMapping("")
 public class UpdatingController {
 	@Autowired
 	PaperMapper paperMapper;

@@ -30,8 +30,7 @@
 	    <select id="getTotal"  resultType="int">
 	        select count(*) from category_
 	    </select>
-	    
-	     <select id="getIdByName" parameterType="string" resultType="int">
+	     <select id="getIdByName" parameterType="string"  resultType="int">
 	        select id from category_ where name=#{name}
 	    </select>
 	</mapper>
