@@ -17,7 +17,8 @@ public class SolrUtil {
     public static SolrClient client;
     private static String url;
     static {
-        url = "http://localhost:8983/solr/how2java";
+//        url = "http://localhost:8983/solr/how2java";
+        url = "http://localhost:8983/solr/paper";
         client = new HttpSolrClient.Builder(url).build();
     }
  
