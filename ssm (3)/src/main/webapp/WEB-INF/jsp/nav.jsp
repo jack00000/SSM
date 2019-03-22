@@ -36,11 +36,7 @@
 </div>
 <style>
 
-body
-{
-	background-image:url('https://source.unsplash.com/random'); 
-	background-size:100% 100%;
-}
+
 </style> 
 
 <script>
