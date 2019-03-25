@@ -47,7 +47,7 @@ public class BackendController {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest req) {
 		System.out.println(req.toString());
-		return "login";
+		return "loginpage";
 	}
 	@RequestMapping("/login2Backend")
 	public String login2Backend(User user, Model model,HttpSession session) {
