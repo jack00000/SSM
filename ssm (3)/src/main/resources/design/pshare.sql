@@ -35,7 +35,7 @@ CREATE TABLE paper_ (
   uid int(11) DEFAULT NULL COMMENT "外键：用户id",
   cid int(11) DEFAULT NULL COMMENT "外键：分类id",
   title varchar(255) DEFAULT NULL COMMENT "文章标题",
-  description varchar(255) DEFAULT NULL COMMENT "描述",
+  description varchar(555) DEFAULT NULL COMMENT "描述",
   updateTime varchar(255) DEFAULT NULL COMMENT "更新时间",
   wordSum varchar(255) DEFAULT NULL COMMENT "字数",
   content Blob DEFAULT NULL COMMENT "正文",

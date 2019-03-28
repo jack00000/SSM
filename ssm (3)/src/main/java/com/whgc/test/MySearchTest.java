@@ -58,7 +58,9 @@ public class MySearchTest extends BaseJunit4Test {
 	@Autowired
 	private TagsMapper tagsMapper;
 	// private  String url = "https://blog.csdn.net";
-	private  String codeproject = "https://www.codeproject.com";
+	private  String codeproject = "https://www.codeproject.com/Articles/1166137/How-to-Record-Twitch-Streams-Automatically-in-Pyth";
+	//爬取深度 10层
+			int depth=0;
 	// private  String blogName = "guoxiaolongonly";
 	@Test
 	@Transactional // 标明此方法需使用事务
@@ -81,30 +83,58 @@ public class MySearchTest extends BaseJunit4Test {
 	/**
 	 * 从网站爬取数据存到数据库
 	 */
+	
 	public void exeTask(){
-		 List<String>aList=getArticleListFromUrlCodeproject(codeproject);
-		 for(String s:aList){
-			 getArticleFromUrl(s);
-		 }
-		// String
-		// teString="https://www.codeproject.com/Articles/1278992/Analyzing-Twitch-Channel-Viewership-with-Python-2";
-//		String teString = "https://www.codeproject.com/Articles/1278516/Visual-Studio-2019-and-Python";
-//		getArticleFromUrl(teString);
+		
+		digui(codeproject);
+//		 List<String>aList=getArticleListFromUrlCodeproject(codeproject);
+//		 for(String s:aList){
+//			 getArticleFromUrl(s);
+//		 }
+//		 for(String s:aList){
+//			 try {
+//				 List<String>aList1=getArticleListFromUrlCodeproject(s);
+//				 for(String s1:aList1){
+//					 getArticleFromUrl(s1);
+//				 }
+//			} catch (Exception e) {
+//				continue;
+//			}
+//			
+//		 }
+	
 	}
-
+	/**
+	 * 爬取网页的递归函数 (自己调用自己)
+	 */
+public String digui(String s){
+	depth++;
+	//获取一个页面的文章链接
+	 List<String>aList=getArticleListFromUrlCodeproject(s);
+	 for(String s1:aList){
+		 //获取文章内容
+		 getArticleFromUrl(s1);
+		 if(depth<10){
+			 digui(s1);
+		 }
+		
+	 }
+	return s;
+	
+	}
 	/**
 	 * 获取文章列表
 	 * 
 	 * @param listurl
 	 */
 	public  List<String> getArticleListFromUrlCodeproject(final String listurl) {
-		boolean isStop = false;
+		
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(listurl)
 					.userAgent(
 							"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36")
-					.timeout(3000).post();
+					.timeout(3000000).post();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,14 +143,14 @@ public class MySearchTest extends BaseJunit4Test {
 		for (Element element : elements) {
 			if (element != null) {
 				final String relHref = element.attr("href"); // ==
-				if (relHref.startsWith("/Articles")) {
+				if (relHref.startsWith("//www.codeproject.com")) {
 					paperUrls.add(relHref);
 				}
 			}
 		}
 		List<String> pList = new ArrayList<>();
 		for (String paper : paperUrls) {
-			pList.add(paper.replace("/Articles", codeproject + "/Articles"));
+			pList.add(paper.replace("//www.codeproject", "https://www.codeproject"));
 		}
 
 		return pList;
@@ -133,24 +163,31 @@ public class MySearchTest extends BaseJunit4Test {
 	 */
 	public  void getArticleFromUrl(String detailurl) {
 		try {
-			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000).post();
+			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000000).post();
 			Element elementTitle = document.getElementById("ctl00_ArticleTitle");// title
 			Element elementDes = document.getElementById("ctl00_description");// description
 			Element elementContent = document.getElementsByClass("article").first();// 这边根据class的内容来过滤
 			Element elementtag = document.getElementById("ctl00_TagList_VisibleTags");
 			Element img=document.getElementById("ctl00_avatar");
-			String author = document.getElementsByClass("author").text();
+			String author = document.getElementsByAttributeValue("rel", "author").text();
 			String[] fields = detailurl.split("\\.");
 			String cate = fields[1];
 			String title = elementTitle.text();
 			String description = elementDes.text();
-			String imgrandom = img.attr("src");
+			String imgrandom=null;
+			if(img!=null){
+				imgrandom = img.attr("src");
+			}
 			String content = elementContent.outerHtml();
-			String tags = elementtag.text();
+			String tags=null;
+			if(elementtag!=null){
+				tags = elementtag.text();
+			}
 			saveArticle(author, cate, title, description, imgrandom, content, tags);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("无效url"+detailurl);
 		}
 	}
 
@@ -214,15 +251,19 @@ public class MySearchTest extends BaseJunit4Test {
 		} catch (Exception e) {
 			paperMapper.add(paper);
 			pid=paperMapper.getIdByName(title);
+			//插入标签表
+			if(tags!=null){
+				String[] fields=tags.split(" ");
+				for(String s:fields){
+					Tags tag=new Tags();
+					tag.setPid(pid);
+					tag.setName(s);
+					tagsMapper.add(tag);
+				}
+			}
 		}
-		//插入标签表
-		String[] fields=tags.split(" ");
-		for(String s:fields){
-			Tags tag=new Tags();
-			tag.setPid(pid);
-			tag.setName(s);
-			tagsMapper.add(tag);
-		}
+		
+		
 		
 	}
 	
