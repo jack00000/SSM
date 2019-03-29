@@ -21,4 +21,5 @@ public interface PaperMapper {
 	
 	public int getIdByName(String name);
 	
+	
 }

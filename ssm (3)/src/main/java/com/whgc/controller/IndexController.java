@@ -161,12 +161,13 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/getIndexData")
-	public String getIndexData(){
+	public String getIndexData(HttpServletRequest req){
 		//定义数据类indexData  然后用fastjson直接转换
 		//所有文章的简介数据indexDatas
 		try {
+			
 			List<IndexData>indexDatas=new ArrayList<>();
-			List<Paper>papers=paperMapper.list();
+			List<Paper>papers=paperMapper.listByPage(0,10);
 			for(Paper paper:papers){
 				IndexData indexData=new IndexData();
 				indexData.setTitle(paper.getTitle());
