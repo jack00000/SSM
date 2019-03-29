@@ -1,13 +1,30 @@
 package com.whgc.test.testSolr;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 public class Paper4solr {
+	 @Field
 	private int id;
+	 @Field
 	private int uid;
+	 @Field
 	private int cid;
+	 @Field
 	private String title;
+	 @Field
 	private String content;
+	 @Field
 	private String description;
+	 @Field
 	private String updatetime;
+	 @Field
+	 private String tags;
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 	public int getId() {
 		return id;
 	}

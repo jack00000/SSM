@@ -10,13 +10,17 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.whgc.mapper.PaperMapper;
+import com.whgc.mapper.TagsMapper;
 import com.whgc.pojo.Paper;
+import com.whgc.pojo.Tags;
 import com.whgc.test.testSolr.Paper4solr;
 import com.whgc.test.testSolr.SolrUtil;  
   
 public class SpringTestSolr extends BaseJunit4Test{  
     @Autowired //自动注入  
     private  PaperMapper paperMapper;  
+    @Autowired
+    private  TagsMapper tagsMapper;
       
     @Test  
     @Transactional   //标明此方法需使用事务    
@@ -26,8 +30,9 @@ public class SpringTestSolr extends BaseJunit4Test{
 //        Paper user = paperMapper.get(1);
 //        System.out.println(user);
 //        System.out.println("------------"+user.getContent());
-        //查出List<paper>并添加到solr
-        List<Paper>papers=paperMapper.list();
+        System.out.println("查出List<paper>并添加到solr---------");
+        List<Paper>papers=new ArrayList<>();
+        papers=paperMapper.list();
         List<Paper4solr>paper4solrs=new ArrayList<>();
         for(Paper p:papers){
         	Paper4solr paper4solr=new Paper4solr();
@@ -37,6 +42,15 @@ public class SpringTestSolr extends BaseJunit4Test{
         	paper4solr.setContent(p.getContent());
         	paper4solr.setDescription(p.getDescription());
         	paper4solr.setUpdatetime(p.getUpdateTime());
+        	List<Tags>tags=tagsMapper.getByPid(p.getId());
+        	if(tags!=null){
+        		StringBuffer tags2=new StringBuffer();
+            	for(Tags  t:tags){
+            		tags2.append(t.getName()+" ");
+            	}
+            	paper4solr.setTags(tags2.toString());
+        	}
+        	
         	paper4solrs.add(paper4solr);
         }
         SolrUtil.batchSaveOrUpdate(paper4solrs);

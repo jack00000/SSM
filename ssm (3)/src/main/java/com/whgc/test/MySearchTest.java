@@ -61,6 +61,8 @@ public class MySearchTest extends BaseJunit4Test {
 	private TagsMapper tagsMapper;
 	// private String url = "https://blog.csdn.net";
 	private String codeproject = "https://www.codeproject.com/Articles/1250071/QR-Code-Encoder-and-Decoder-NET-Class-Library-Writ";
+	private String codeproject2 = "https://www.codeproject.com/Articles/15924/Library-for-Decode-Encode-SMS-PDU";
+	private String codeproject3 = "https://www.codeproject.com/Articles/1280117/ASP-NET-Multiple-Selection-DropDownList-Using-NET";
 	// 爬取深度 10层
 	int depth = 0;
 	//记录所有查过的url 新查在里面就不查
@@ -92,6 +94,34 @@ public class MySearchTest extends BaseJunit4Test {
 	public void exeTask() {
 
 		digui(codeproject);
+//		Thread t1= new Thread(){
+//            public void run(){
+//            	synchronized (allUrl){
+//            		
+//            	}
+//        		
+//            }
+//        };
+//         
+//        t1.start();
+//        Thread t2= new Thread(){
+//            public void run(){
+//            	synchronized (allUrl){
+//            		digui(codeproject2);
+//            	}
+//            }
+//        };
+//         
+//        t2.start();
+//        Thread t3= new Thread(){
+//            public void run(){
+//            	synchronized (allUrl){
+//            		digui(codeproject3);
+//            	}
+//            }
+//        };
+//         
+//        t3.start();
 		// List<String>aList=getArticleListFromUrlCodeproject(codeproject);
 		// for(String s:aList){
 		// getArticleFromUrl(s);
@@ -117,13 +147,20 @@ public class MySearchTest extends BaseJunit4Test {
 		depth++;
 		// 获取一个页面的文章链接
 			List<String> aList = getArticleListFromUrlCodeproject(s);
-			//去除alist中 已查过url 	
+			
 			for (String s1 : aList) {
-				// 获取文章内容
+				// 如果当前url不在allurl里面 获取文章内容
+				if(!allUrl.contains(s1)){
 					getArticleFromUrl(s1);
-					if (depth < 1000000) {
+					allUrl.add(s1);
+					if (depth < 10000) {
 						digui(s1);
 					}
+				}else{
+					//如果在allurl 说明查过啦 直接跳过
+					continue;
+				}
+				
 			}
 	}
 
@@ -157,9 +194,9 @@ public class MySearchTest extends BaseJunit4Test {
 		for (String paper : paperUrls) {
 			String string=paper.replace("//www.codeproject", "https://www.codeproject");
 			pList.add(string);
-			if(!allUrl.contains(string)){
-				allUrl.add(string);
-			}
+//			if(!allUrl.contains(string)){
+//				allUrl.add(string);
+//			}
 		}
 
 		return pList;
