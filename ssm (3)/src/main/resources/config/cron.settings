@@ -1,2 +1,2 @@
 [com.whgc.test]
-HutoolCronTask.run = */20 * * * * ?
+HutoolCronTask.run = */2 * * * * ?
