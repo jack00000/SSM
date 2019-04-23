@@ -6,6 +6,7 @@ public class User {
 	private String email;
 	private String github;
 	private String avatarURL;
+	private String password;
 	
 	public String getAvatarURL() {
 		return avatarURL;
@@ -19,7 +20,7 @@ public class User {
 	public void setGithub(String github) {
 		this.github = github;
 	}
-	private String password;
+	
 	public int getId() {
 		return id;
 	}

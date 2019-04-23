@@ -60,7 +60,7 @@ public class Spider4CSDN extends BaseJunit4Test {
 	@Autowired
 	private TagsMapper tagsMapper;
 	// private String url = "https://blog.csdn.net";
-	private String codeproject = "https://www.codeproject.com/Articles/1250071/QR-Code-Encoder-and-Decoder-NET-Class-Library-Writ";
+	private String codeproject = "https://www.csdn.net";
 	private String codeproject2 = "https://www.codeproject.com/Articles/15924/Library-for-Decode-Encode-SMS-PDU";
 	private String codeproject3 = "https://www.codeproject.com/Articles/1280117/ASP-NET-Multiple-Selection-DropDownList-Using-NET";
 	// 爬取深度 10层
@@ -186,7 +186,7 @@ public class Spider4CSDN extends BaseJunit4Test {
 		for (Element element : elements) {
 			if (element != null) {
 				final String relHref = element.attr("href"); // ==
-				if (relHref.startsWith("//www.codeproject.com")) {
+				if (relHref.startsWith("https://blog.csdn.net")) {
 					paperUrls.add(relHref);
 				}
 			}

@@ -8,83 +8,79 @@
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 <!-- jsp定义全局变量 -->
 <%!String name = "张小白";%>
-<style>
-body
-{
-	background-image:url('https://source.unsplash.com/random'); 
-	background-size:100% 100%;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pshare Admin-登录页面</title>
 
-</style> 
+    <!-- Bootstrap -->
+    <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/common.css">
+    <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/main.css">
 
-<script>
-$(function(){    
-    $.ajax({    
-        //请求方式    
-        type:"GET",    
-        //文件位置    
-        url:"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN",  
-        //返回数据格式为json,也可以是其他格式如    
-        dataType: "json",    
-        //请求成功后要执行的函数，拼接html    
-        success: function(data){    
-        	data.images[n].url = data.images[n].url.replace('1920x1080', '1080x1920');
-			var url = 'https://www.bing.com' + data.images[n].url;
-            $("div").append(str);    
-        }    
-    });    
-});    
-$(document).ready(function(){
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            background-color: #f0f2f4;
+        }
+        .sign-in-wrapper {
+            padding-top: 80px;
+        }
+        .sign-in-wrapper .sign-in-inner {
+            width: 370px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sign-in-wrapper .form-sign-in .form-control {
+            height: 40px;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
 
-		$.ajax({url:"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN",success:function(data){
-			var url = 'https://www.bing.com' + data.images[n].url;debugger;
-		}});
-});
-</script>
-
-  <style>
-            /*web background*/
-            .container{
-                display:table;
-                height:100%;
-            }
-
-            .row{
-                display: table-cell;
-                vertical-align: middle;
-            }
-            /* centered columns styles */
-            .row-centered {
-                text-align:center;
-            }
-            .col-centered {
-                display:inline-block;
-                float:none;
-                text-align:left;
-                margin-right:-4px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="container" >
-            <div class="row row-centered">
-                <div class="well col-md-6 col-centered">
-                    <h2>欢迎登录</h2>
-                    <form action="login2Backend" method="post" role="form">
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="userid" name="name" placeholder="请输入用户ID"/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
-                        </div>
-                        <br/>
-                        <button type="submit" class="btn btn-success btn-block">登录</button>
-                    </form>
-                </div>
+    <div class="sign-in-wrapper">
+        <div class="sign-in-inner">
+            <div class="text-center">
+                <h3><a href="#">Pshare Admin</a>-登录页面</h3>
+                <h4 class="text-left" style="border-left: 5px solid #4ec3ff">&nbsp;&nbsp;登录</h4>
             </div>
-        </div>
+            <form class="form-sign-in" method="post" action="login2Backend">
+                <div class="form-group">
+                    <input name="name" type="text" class="form-control" placeholder="账号">
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" placeholder="密码">
+                </div>
 
- 
+                <div class="input-group input-group-img">
+                    <input type="text" class="form-control" placeholder="验证码">
+                    <div class="input-group-addon">
+                        <img src="http://pq1rtdg74.bkt.clouddn.com/vcode.png" alt="验证码">
+                    </div>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> 记住账号
+                    </label>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+                <div class="separator-30"></div>
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <a href="#" class="font-12">忘记密码 ?</a>
+                    </div>
+                  
+                </div>
+            </form>
+        </div><!-- ./sign-in-inner -->
+    </div>
+</body>
+</html>
