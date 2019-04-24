@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -63,6 +66,9 @@ public class MySearchTest extends BaseJunit4Test {
 	private String codeproject = "https://www.codeproject.com/Articles/1250071/QR-Code-Encoder-and-Decoder-NET-Class-Library-Writ";
 	private String codeproject2 = "https://www.codeproject.com/Articles/15924/Library-for-Decode-Encode-SMS-PDU";
 	private String codeproject3 = "https://www.codeproject.com/Articles/1280117/ASP-NET-Multiple-Selection-DropDownList-Using-NET";
+	//线程池处理文章url爬取 10个线程 max 15个线程 60s 没有使用就回收
+//	ThreadPoolExecutor threadPool= new ThreadPoolExecutor(10, 15, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+	ThreadPoolExecutor threadPool= new ThreadPoolExecutor(20, 30, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 	// 爬取深度 10层
 	int depth = 0;
 	//记录所有查过的url 新查在里面就不查
@@ -97,7 +103,7 @@ public class MySearchTest extends BaseJunit4Test {
 //		Thread t1= new Thread(){
 //            public void run(){
 //            	synchronized (allUrl){
-//            		
+//            		digui(codeproject);
 //            	}
 //        		
 //            }
@@ -122,21 +128,21 @@ public class MySearchTest extends BaseJunit4Test {
 //        };
 //         
 //        t3.start();
-		// List<String>aList=getArticleListFromUrlCodeproject(codeproject);
-		// for(String s:aList){
-		// getArticleFromUrl(s);
-		// }
-		// for(String s:aList){
-		// try {
-		// List<String>aList1=getArticleListFromUrlCodeproject(s);
-		// for(String s1:aList1){
-		// getArticleFromUrl(s1);
-		// }
-		// } catch (Exception e) {
-		// continue;
-		// }
-		//
-		// }
+//		 List<String>aList=getArticleListFromUrlCodeproject(codeproject);
+//		 for(String s:aList){
+//		 getArticleFromUrl(s);
+//		 }
+//		 for(String s:aList){
+//		 try {
+//		 List<String>aList1=getArticleListFromUrlCodeproject(s);
+//		 for(String s1:aList1){
+//		 getArticleFromUrl(s1);
+//		 }
+//		 } catch (Exception e) {
+//		 continue;
+//		 }
+//		
+//		 }
 
 	}
 
@@ -151,6 +157,7 @@ public class MySearchTest extends BaseJunit4Test {
 			for (String s1 : aList) {
 				// 如果当前url不在allurl里面 获取文章内容
 				if(!allUrl.contains(s1)){
+					//定义一个线程池  处理需要爬取的url
 					getArticleFromUrl(s1);
 					allUrl.add(s1);
 					if (depth < 10000) {
@@ -208,7 +215,21 @@ public class MySearchTest extends BaseJunit4Test {
 	 * @param detailurl
 	 */
 	public void getArticleFromUrl(String detailurl) {
-		try {
+		
+        
+        threadPool.execute(new Runnable(){
+   
+            @Override
+            public void run() {
+                // 用线程池处理文章获取操作
+                urlTask(detailurl);
+            }
+               
+        });
+		
+	}
+    public void urlTask(String detailurl) {
+    	try {
 			Document document = Jsoup.connect(detailurl).userAgent("Mozilla/5.0").timeout(3000000).post();
 			Element elementTitle = document.getElementById("ctl00_ArticleTitle");// title
 			Element elementDes = document.getElementById("ctl00_description");// description
@@ -236,7 +257,6 @@ public class MySearchTest extends BaseJunit4Test {
 			System.out.println("无效url" + detailurl);
 		}
 	}
-
 	/**
 	 * 保存文章到数据库
 	 * 

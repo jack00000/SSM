@@ -38,7 +38,7 @@ CREATE TABLE paper_ (
   description varchar(555) DEFAULT NULL COMMENT "描述",
   updateTime varchar(255) DEFAULT NULL COMMENT "更新时间",
   wordSum varchar(255) DEFAULT NULL COMMENT "字数",
-  content Blob DEFAULT NULL COMMENT "正文",
+  content loogblob DEFAULT NULL COMMENT "正文",
   
   PRIMARY KEY (id)
 --  CONSTRAINT fk_paper_category FOREIGN KEY (cid) REFERENCES category_ (id),

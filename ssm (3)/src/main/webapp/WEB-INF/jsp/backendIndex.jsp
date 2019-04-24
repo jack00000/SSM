@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/font-awesome.min.css">
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/common.css">
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/main.css">
-
+    <link rel="stylesheet" href="http://pqh1rik4s.bkt.clouddn.com/fontawesome-webfont.woff2">
+    <link rel="stylesheet" href="http://pqh1rik4s.bkt.clouddn.com/fontawesome-webfont.ttf">
+    <link rel="stylesheet" href="http://pqh1rik4s.bkt.clouddn.com/fontawesome-webfont.woff">
+        <link rel="stylesheet" href="http://pqh1rik4s.bkt.clouddn.com/font-awesome.min%20-%20%E5%89%AF%E6%9C%AC.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -102,42 +105,22 @@
             </li>
             <li class="separator-20"></li>
             <li class="menu-item">
-                <a href="javascript:void(0)"><i class="fa fa-cube" aria-hidden="true"></i>UI 控件</a>
+                <a href="javascript:void(0)"><i class="fa fa-cube" aria-hidden="true"></i>文章管理</a>
                 <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="widget.html">小部件</a></li>
-                    <li class="sub-menu-item"><a href="animate.html">动画</a></li>
+                    <li class="sub-menu-item"><a href="widget.html">文章一览</a></li>
+                    <li class="sub-menu-item"><a href="animate.html">文章删除</a></li>
                 </ul>
             </li>
             <li class="menu-item">
-                <a href="javascript:void(0)"><i class="fa fa-key" aria-hidden="true"></i>插件应用</a>
+                <a href="javascript:void(0)"><i class="fa fa-key" aria-hidden="true"></i>用户管理</a>
                 <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="jq-plugin.html">jQuery插件</a></li>
-                    <li class="sub-menu-item"><a href="plugin.html">我的插件</a></li>
+                    <li class="sub-menu-item"><a href="jq-plugin.html">用户一览</a></li>
+                    <li class="sub-menu-item"><a href="plugin.html">用户删除</a></li>
+                    <li class="sub-menu-item"><a href="plugin.html">管理员新增</a></li>
                 </ul>
             </li>
-            <li class="menu-item">
-                <a href="javascript:void(0)"><i class="fa fa-book" aria-hidden="true"></i>其他页面</a>
-                <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="inbox.html">收件箱</a></li>
-                    <li class="sub-menu-item"><a href="table.html">表格</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="javascript:void(0)"><i class="fa fa-tag" aria-hidden="true"></i>更多页面 <span class="badge">4</span></a>
-                <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="blank.html">空白页面</a></li>
-                    <li class="sub-menu-item"><a href="login.html">登录页面</a></li>
-                    <li class="sub-menu-item"><a href="jump.html">跳转页面</a></li>
-                    <li class="sub-menu-item"><a href="404.html">404页面</a></li>
-                </ul>
-            </li>
-            <li class="menu-item">
-                <a href="javascript:void(0)"><i class="fa fa-list" aria-hidden="true"></i>一级菜单</a>
-                <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="#">二级菜单-1</a></li>
-                    <li class="sub-menu-item"><a href="#">二级菜单-2</a></li>
-                </ul>
-            </li>
+          
+          
 
             <li class="separator-30"></li>
 
@@ -159,20 +142,22 @@
                 </div>
 
                 <div class="box-inner">
-                    <div class="container">
-						<div class="row clearfix">
-							<div class="col-md-6 column">
-							   
-							</div>
-							<div class="col-md-6 column">
-							</div>
-						</div>
-						<div class="row clearfix">
-							<div class="col-md-6 column">
-							</div>
-							<div class="col-md-6 column">
-							</div>
-						</div>
+                    <div class="alert alert-success" role="alert">You successfully read this important alert message.</div>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <strong>Warning!</strong> User Anderson violated regulations, please deal with it.
+                    </div>
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <strong>Warning!</strong> User Taylor violated regulations, please deal with it.
+                    </div>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <strong>Warning!</strong>  User Johnson violated regulations, please deal with it.
+                    </div>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <strong>Warning!</strong>  User Wilson violated regulations, please deal with it.
                     </div>
                 </div>
             </div>
