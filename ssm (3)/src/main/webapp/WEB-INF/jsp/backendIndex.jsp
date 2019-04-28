@@ -14,6 +14,8 @@
 
     <!-- Bootstrap -->
     <link href="http://pq1rtdg74.bkt.clouddn.com/bootstrap.css" rel="stylesheet">
+    <link href="http://pqh1rik4s.bkt.clouddn.com/highcharts.js" rel="stylesheet">
+    <link href="http://pqh1rik4s.bkt.clouddn.com/jquery.min.js" rel="stylesheet">
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/daterangepicker.css">
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/font-awesome.min.css">
     <link rel="stylesheet" href="http://pq1rtdg74.bkt.clouddn.com/common.css">
@@ -84,7 +86,7 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="navbar-dropdownmenu" data-toggle="dropdown">
                     <img src="http://pq1rtdg74.bkt.clouddn.com/avatar-mini.jpg" alt="Admin">
-                    管理员
+                    管理员${user2.name}
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbar-dropdownmenu">
@@ -101,20 +103,20 @@
 
         <ul class="menu-list">
             <li class="menu-item actived">
-                <a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>首页</a>
+                <a><i class="fa fa-home" aria-hidden="true"></i>首页</a>
             </li>
             <li class="separator-20"></li>
             <li class="menu-item">
                 <a href="javascript:void(0)"><i class="fa fa-cube" aria-hidden="true"></i>文章管理</a>
                 <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="widget.html">文章一览</a></li>
+                    <li class="sub-menu-item"><a href="paperReview">文章一览</a></li>
                     <li class="sub-menu-item"><a href="animate.html">文章删除</a></li>
                 </ul>
             </li>
             <li class="menu-item">
                 <a href="javascript:void(0)"><i class="fa fa-key" aria-hidden="true"></i>用户管理</a>
                 <ul class="sub-menu-list">
-                    <li class="sub-menu-item"><a href="jq-plugin.html">用户一览</a></li>
+                    <li class="sub-menu-item"><a href="userReview">用户一览</a></li>
                     <li class="sub-menu-item"><a href="plugin.html">用户删除</a></li>
                     <li class="sub-menu-item"><a href="plugin.html">管理员新增</a></li>
                 </ul>
@@ -145,19 +147,19 @@
                     <div class="alert alert-success" role="alert">You successfully read this important alert message.</div>
                     <div class="alert alert-warning alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Warning!</strong> User Anderson violated regulations, please deal with it.
+                        <strong>Warning!</strong> User Anderson violated regulations, please  <a href="login.html">deal with it</a>.
                     </div>
                     <div class="alert alert-info alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Warning!</strong> User Taylor violated regulations, please deal with it.
+                        <strong>Warning!</strong> User Taylor violated regulations, please  <a href="login.html">deal with it</a>.
                     </div>
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Warning!</strong>  User Johnson violated regulations, please deal with it.
+                        <strong>Warning!</strong>  User Johnson violated regulations, please <a href="login.html">deal with it</a>.
                     </div>
                     <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Warning!</strong>  User Wilson violated regulations, please deal with it.
+                        <strong>Warning!</strong>  User Wilson violated regulations, please  <a href="login.html">deal with it</a>.
                     </div>
                 </div>
             </div>
@@ -175,6 +177,8 @@
 <script src="http://pq1rtdg74.bkt.clouddn.com/moment.min.js"></script>
 <script src="http://pq1rtdg74.bkt.clouddn.com/daterangepicker.js"></script>
 <script src="http://pq1rtdg74.bkt.clouddn.com/main.js"></script>
+<script src="http://pqh1rik4s.bkt.clouddn.com/jquery.min.js"></script>
+<script src="http://pqh1rik4s.bkt.clouddn.com/highcharts.js"></script>
 </body>
 </html>
 	

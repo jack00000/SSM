@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) throws UnsupportedEncodingException {
         TransApi api = new TransApi(APP_ID, SECURITY_KEY);
 
-        String query = "高度600米";
-        System.out.println(api.getTransResult(query, "auto", "en"));
+        String query = "Height 600 meters";
+        System.out.println(api.getTransResult(query, "auto", "zh"));
     }
 
 }

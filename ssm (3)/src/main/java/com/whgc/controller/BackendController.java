@@ -19,6 +19,7 @@ import com.whgc.pojo.Paper;
 import com.whgc.pojo.Payment;
 import com.whgc.pojo.Review;
 import com.whgc.pojo.User;
+import com.whgc.test.javaMail.SendMail;
 import com.whgc.util.Page;
 /**
  * 后台页面的跳转
@@ -58,7 +59,7 @@ public class BackendController {
 		if (null == user1) {
 			model.addAttribute("msg", "账号密码错误");
 			return "login";
-		} else {
+		}else {
 			model.addAttribute("user2", user2);
 			session.setAttribute("user2", user2);
 			return "backendIndex";
@@ -66,10 +67,33 @@ public class BackendController {
 		}
 
 	}
+	@RequestMapping("/paperReview")
+	public String jump2paperReview(){
+		return "paperReview";
+	}
+	@RequestMapping("/userReview")
+	public String jump2userReview(){
+		return "userReview";
+	}
 	@RequestMapping("backendIndex")
 	public String backendIndex(){
 		return "backendIndex";
 	}
+	@RequestMapping("sendmail")
+	public String sendmail(HttpServletRequest req) throws Exception{
+		String qqyx=req.getParameter("qqyx");
+		if(qqyx==null){
+			qqyx="1558185399@qq.com";
+		}
+		
+		SendMail.sendmail(qqyx);
+		return "login";
+	}
+	@RequestMapping("jump2sendmail")
+	public String jump2sendmail(HttpServletRequest req) throws Exception{
+		return "resetPw";
+	}
+	
 	//----------------------------------
 	//category后台管理的跳转页面
 	@RequestMapping("/categoryMana")

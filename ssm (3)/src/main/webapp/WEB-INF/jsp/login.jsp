@@ -70,12 +70,12 @@
                         <input type="checkbox" value="remember-me"> 记住账号
                     </label>
                 </div>
-
+                <div style="color:red">${msg}</div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
                 <div class="separator-30"></div>
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <a href="#" class="font-12">忘记密码 ?</a>
+                        <a href="jump2sendmail" class="font-12">忘记密码 ?</a>
                     </div>
                   
                 </div>

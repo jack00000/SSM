@@ -30,6 +30,11 @@
 
   <dependencies>
   <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
+      </dependency>
+  <dependency>
 	<groupId>org.thymeleaf</groupId>
 	<artifactId>thymeleaf</artifactId>
 	<version>3.0.9.RELEASE</version>
